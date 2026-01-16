@@ -2,6 +2,8 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { ArrowLeft, Share2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { fetchPosts, type Post } from '../data/posts';
+import { AdMob, BannerAdSize, BannerAdPosition } from '@capacitor-community/admob';
+import { Capacitor } from '@capacitor/core';
 
 export default function Article() {
     const navigate = useNavigate();
@@ -10,12 +12,31 @@ export default function Article() {
     const [post, setPost] = useState<Post | null>(location.state?.post || null);
 
     useEffect(() => {
+        // 1. Load Post Data
         // Fallback: If accessed directly via URL or refresh
         if (!post && id) {
             fetchPosts().then(posts => {
                 const found = posts.find(p => p.id === id);
                 if (found) setPost(found);
             });
+        }
+
+        // 2. Initialize Ads (Android Only)
+        if (Capacitor.getPlatform() === 'android') {
+            AdMob.initialize({}).then(() => {
+                AdMob.showBanner({
+                    adId: 'ca-app-pub-3940256099942544/6300978111', // Test Ad ID
+                    adSize: BannerAdSize.BANNER,
+                    position: BannerAdPosition.BOTTOM_CENTER,
+                    margin: 0,
+                    isTesting: true
+                });
+            }).catch(err => console.error('AdMob Init/Show Failed', err));
+
+            return () => {
+                // Cleanup Ad on unmount
+                AdMob.hideBanner().catch(console.error);
+            };
         }
     }, [id, post]);
 
@@ -60,6 +81,17 @@ export default function Article() {
                             {post.content}
                         </p>
                     </div>
+
+                    {/* Web Ad Placeholder (Hidden on Android) */}
+                    {Capacitor.getPlatform() !== 'android' && (
+                        <div className="mt-8 py-8 bg-white/5 border border-white/5 rounded-lg flex flex-col items-center justify-center text-center">
+                            <span className="text-xs text-uppercase text-gray-500 mb-2">Advertisement</span>
+                            <div className="w-[300px] h-[250px] bg-white/10 flex items-center justify-center">
+                                {/* Google AdSense Script would reside here in index.html, targeting this slot */}
+                                <span className="text-white/50">Google AdSense Space</span>
+                            </div>
+                        </div>
+                    )}
 
                     <div className="mt-12 py-8 border-t border-white/10 text-center">
                         <p className="text-xs text-white/30 uppercase tracking-[0.2em]">Real Petty Mayo • 2024</p>
