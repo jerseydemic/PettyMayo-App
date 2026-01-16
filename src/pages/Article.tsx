@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Share, Instagram } from 'lucide-react';
+import { Share as CapacitorShare } from '@capacitor/share';
 import { useEffect, useState } from 'react';
 import { Browser } from '@capacitor/browser';
 import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
@@ -149,7 +150,32 @@ export default function Article() {
                     }} className="p-2 text-white/70 hover:text-white transition-colors">
                         <Instagram size={20} />
                     </button>
-                    <button className="p-2 text-white/70 hover:text-white transition-colors">
+                    <button
+                        onClick={async () => {
+                            try {
+                                const shareData = {
+                                    title: post.title,
+                                    text: `Check out this tea! ☕️ ${post.title}`,
+                                    url: window.location.href,
+                                    dialogTitle: 'Share with friends',
+                                };
+
+                                const canShare = await CapacitorShare.canShare();
+                                if (canShare.value) {
+                                    await CapacitorShare.share(shareData);
+                                } else {
+                                    // Web Fallback
+                                    await navigator.clipboard.writeText(window.location.href);
+                                    alert("Link copied to clipboard! 📋");
+                                }
+                            } catch (error) {
+                                console.error('Share failed:', error);
+                                // Fallback for errors (like user cancelling) or unsupported environments
+                                await navigator.clipboard.writeText(window.location.href);
+                                alert("Link copied to clipboard! 📋");
+                            }
+                        }}
+                        className="p-2 text-white/70 hover:text-white transition-colors">
                         <Share size={20} />
                     </button>
                 </div>
