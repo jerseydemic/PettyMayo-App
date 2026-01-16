@@ -35,7 +35,7 @@ export default function Home() {
             </header>
 
             {/* Content */}
-            <main className="flex-1 pb-20">
+            <main className="flex-1 w-full max-w-md mx-auto">
                 {/* Hero Banner */}
                 <div className="w-full mb-0.5">
                     <img
@@ -78,16 +78,21 @@ export default function Home() {
             </main>
 
             {/* Social Footer */}
-            <footer className="py-8 px-4 border-t border-white/10 bg-white/5 backdrop-blur-sm">
-                <div className="flex justify-center gap-6 mb-4">
-                    <a href="https://instagram.com/realpettymay0" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
-                        <Instagram size={24} className="text-white" />
-                    </a>
-                    <a href="https://facebook.com/realpettymayo" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
-                        <Facebook size={24} className="text-white" />
-                    </a>
+            <footer className="mt-12 mb-8 px-6">
+                <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center gap-4 mx-auto max-w-sm">
+                    <div className="flex justify-center gap-8">
+                        <a href="https://instagram.com/realpettymay0" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors transform hover:scale-110">
+                            <Instagram size={28} />
+                        </a>
+                        <a href="https://facebook.com/realpettymayo" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors transform hover:scale-110">
+                            <Facebook size={28} />
+                        </a>
+                    </div>
+                    <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] font-medium pt-2 border-t border-white/5 w-full text-center">
+                        Stay Petty 💅
+                    </p>
                 </div>
-                <p className="text-center text-xs text-white/40 uppercase tracking-widest font-medium">Follow for more tea ☕️</p>
+                <div className="h-safe-area-bottom" /> {/* Safety spacing for iPhone Home Bar */}
             </footer>
         </div>
     );
