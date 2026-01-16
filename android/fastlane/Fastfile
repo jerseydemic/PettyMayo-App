@@ -1,0 +1,27 @@
+default_platform(:android)
+
+platform :android do
+  desc "Deploy to Internal Testing"
+  lane :deploy do
+    gradle(
+      task: "bundleRelease",
+      properties: {
+        "android.injected.signing.store.file" => File.expand_path("../app/release.keystore"),
+        "android.injected.signing.store.password" => "TrainerApp123!",
+        "android.injected.signing.key.alias" => "strategy-trainer",
+        "android.injected.signing.key.password" => "TrainerApp123!"
+      }
+    )
+    
+    upload_to_play_store(
+        track: "internal",
+        json_key: "fastlane/api-key.json",
+        package_name: "com.kingdemic.pettymayo",
+        release_status: "draft",
+        skip_upload_metadata: true,
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+        validate_only: false
+    )
+  end
+end
