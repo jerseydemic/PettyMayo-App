@@ -46,23 +46,28 @@ export default function Home() {
                 </div>
 
                 {/* Grid Content */}
-                <div className="px-0.5">
+                {/* Grid Content */}
+                <div className="w-full">
                     {loading ? (
                         <div className="flex h-[40vh] items-center justify-center">
                             <Loader2 className="w-8 h-8 animate-spin text-white/50" />
                         </div>
                     ) : (
-                        <div className="grid grid-cols-3 gap-1.5"> {/* Increased gap for cleaner look */}
+                        <div className="grid grid-cols-3 gap-1">
                             {posts.map((post) => (
                                 <button
                                     key={post.id}
                                     onClick={() => handlePostClick(post)}
-                                    className="relative aspect-square w-full run-in bg-white/5 active:opacity-80 transition-opacity overflow-hidden rounded-sm"
+                                    // Removed aspect-square to allow natural height? No, grid needs structure.
+                                    // Using aspect-square + object-contain ensures full image visible in square.
+                                    // User said "entire image needs to fit". 
+                                    // User said "Remove the white space borders u added".
+                                    className="relative aspect-square w-full active:opacity-80 transition-opacity overflow-hidden bg-black"
                                 >
                                     <img
                                         src={post.thumbnail}
                                         alt={post.title}
-                                        className="h-full w-full object-cover"
+                                        className="h-full w-full object-contain"
                                         loading="lazy"
                                     />
                                 </button>
