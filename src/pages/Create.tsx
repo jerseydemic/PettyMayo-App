@@ -254,6 +254,7 @@ return (
         </div>
     </div>
 );
+    );
 }
 
 function PipelineStep({ icon, label, active, completed, color }: { icon: any, label: string, active: boolean, completed: boolean, color: string }) {
