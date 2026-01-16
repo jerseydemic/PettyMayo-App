@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Upload, Loader2, FileText, Search, Sparkles, Check } from 'lucide-react';
 import type { Post } from '../data/posts';
 
-export default function Create() {
+export default function Create({ embedded }: { embedded?: boolean }) {
     const navigate = useNavigate();
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -17,9 +17,6 @@ export default function Create() {
     const [tweetInput, setTweetInput] = useState('');
     const [tweetId, setTweetId] = useState<string | null>(null);
     const [title] = useState("We Can't Believe What Just Happened");
-
-    // Stub for embedded prop if needed later, but we removed it to simplify imports for now
-    const embedded = window.location.pathname === '/admin';
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -82,7 +79,6 @@ Stay tuned, because this tea is still piping hot and we're just getting started.
             id: Date.now().toString(),
             thumbnail: image || '/placeholder.jpg',
             title: title || 'New Tea Spilled',
-            time: 'Just Now',
             articleUrl: '#',
             content: generatedContent,
             tweetId: tweetId || undefined
