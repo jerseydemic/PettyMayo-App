@@ -4,6 +4,22 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #000;
+  background-color: #111;
+  /* Dark background for the "outside" area */
   color: #fff;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  max-width: 480px;
+  /* Mobile width */
+  background-color: #000;
+  /* App background */
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  /* Subtle shadow */
 }
