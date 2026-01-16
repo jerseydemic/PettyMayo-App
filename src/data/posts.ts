@@ -23,6 +23,7 @@ const STATIC_POSTS: Post[] = [
         title: 'Disney Evil Queen Fired',
         thumbnail: '/evil_queen.jpg',
         articleUrl: 'https://instagram.com/realpettymay0',
+        tweetId: '2010893597907058894',
         content: `Sabrina Von B, the viral "Evil Queen" performer at Disney, has reportedly been fired after an impressive 8-year run. 🍎👑
 
 Known for her sharp wit and icy interactions that fans absolutely loved, Sabrina breathed new life into the classic villain character, becoming a social media sensation in the process.
@@ -90,7 +91,6 @@ Sources close to Kristy say she is "relieved" and ready to move forward. "She wa
         title: 'Bethenny Frankel Battles Infection',
         thumbnail: '/bethenny.png',
         articleUrl: 'https://instagram.com/realpettymay0',
-        tweetId: '2010893597907058894',
         content: `**ST. BARTHS —** What was supposed to be a dream New Year's Eve getaway turned into a medical nightmare for reality TV mogul Bethenny Frankel, igniting a firestorm of online speculation and a personal vow to never trust hotel laundry again.
 
 The former *Real Housewives of New York City* star, 53, took to TikTok and Instagram earlier this week to document a harrowing health scare that left her face covered in a painful, disfiguring rash. Frankel, usually known for her sharp wit and Skinnygirl empire, appeared vulnerable and visibly swollen in a series of "Get Ready With Me" videos that quickly pivoted from glamour to grime.

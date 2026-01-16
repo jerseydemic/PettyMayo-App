@@ -40,12 +40,14 @@ export default function Create() {
         await new Promise(r => setTimeout(r, 2000));
 
         // Mock Generation
-        setGeneratedTitle("Viral Update: Breaking News");
-        setGeneratedContent(`Here is the deep dive on the image you just uploaded. 
-    
-    The internet is buzzing about this latest development. Fans are divided, with some calling it a PR stunt and others seeing it as a genuine moment.
-    
-    "It's absolutely wild," one commentator noted. Stay tuned as this story develops.`);
+        setGeneratedTitle("TEA SPILLED: The Receipts Are In ☕️");
+        setGeneratedContent(`Matches are burnt, bridges are crisp, and honey... the tea is SCALDING today. 🔥
+
+We just got the exclusive scoop on this situation and let me tell you, it is MESSY. Sources close to the drama are saying that this was not accidental.
+
+"I have never seen anything like it," one insider whispered. "It's giving chaos."
+
+Stay petty, because we are digging for more. 💅`);
 
         setProcessStage(4); // Done
         setTimeout(() => setStep('preview'), 500);
