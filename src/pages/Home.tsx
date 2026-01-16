@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Browser } from '@capacitor/browser';
+import { Link } from 'react-router-dom';
 import { fetchPosts, type Post } from '../data/posts';
 import { Loader2, Instagram, Facebook } from 'lucide-react';
 
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const loadData = async () => {
@@ -19,21 +17,11 @@ export default function Home() {
         loadData();
     }, []);
 
-    const handlePostClick = async (post: Post) => {
-        if (post.content) {
-            navigate(`/article/${post.id}`, { state: { post } });
-        } else {
-            await Browser.open({ url: post.articleUrl });
-        }
-    };
-
     return (
         <div className="min-h-screen bg-black text-white relative flex flex-col">
             {/* Liquid Glass Header */}
-            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 flex justify-between items-center">
-                <div className="w-6" /> {/* Spacer */}
+            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 flex justify-center items-center relative">
                 <h1 className="text-xl font-bold tracking-tight uppercase text-white/90 drop-shadow-sm">Petty Mayo</h1>
-
             </header>
 
             {/* Content */}
@@ -57,14 +45,10 @@ export default function Home() {
                     ) : (
                         <div className="grid grid-cols-3 gap-1">
                             {posts.map((post) => (
-                                <button
+                                <Link
                                     key={post.id}
-                                    onClick={() => handlePostClick(post)}
-                                    // Removed aspect-square to allow natural height? No, grid needs structure.
-                                    // Using aspect-square + object-contain ensures full image visible in square.
-                                    // User said "entire image needs to fit". 
-                                    // User said "Remove the white space borders u added".
-                                    className="relative aspect-square w-full active:opacity-80 transition-opacity overflow-hidden bg-black"
+                                    to={`/${post.category || 'news'}/${post.slug || post.id}`} // Fallback for old/custom posts without slugs
+                                    className="group relative aspect-[4/5] overflow-hidden bg-gray-900 border border-white/10"
                                 >
                                     <img
                                         src={post.thumbnail}
@@ -72,7 +56,7 @@ export default function Home() {
                                         className="h-full w-full object-contain"
                                         loading="lazy"
                                     />
-                                </button>
+                                </Link>
                             ))}
                         </div>
                     )}

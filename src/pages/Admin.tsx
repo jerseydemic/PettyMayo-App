@@ -1,14 +1,16 @@
-
 import { useState, useEffect } from 'react';
-import { Lock, LogIn, LayoutDashboard, Settings as SettingsIcon } from 'lucide-react';
+import { Lock, LogIn, LayoutDashboard, Settings as SettingsIcon, Library, LogOut } from 'lucide-react';
 import Create from './Create';
 import Settings from './Settings';
+import ManageContent from './admin/ManageContent';
+import { type Post } from '../data/posts';
 
 export default function Admin() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
-    const [activeTab, setActiveTab] = useState<'create' | 'settings'>('create');
+    const [activeTab, setActiveTab] = useState<'create' | 'settings' | 'manage'>('manage');
     const [error, setError] = useState(false);
+    const [editingPost, setEditingPost] = useState<Post | null>(null);
 
     useEffect(() => {
         const session = sessionStorage.getItem('admin_session');
@@ -20,7 +22,7 @@ export default function Admin() {
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         // Hardcoded for now as requested
-        if (password === 'admin123') {
+        if (password === 'dontbepettyjj') {
             setIsAuthenticated(true);
             sessionStorage.setItem('admin_session', 'active');
             setError(false);
@@ -34,6 +36,11 @@ export default function Admin() {
         setIsAuthenticated(false);
         sessionStorage.removeItem('admin_session');
         setPassword('');
+    };
+
+    const handleEditPost = (post: Post) => {
+        setEditingPost(post);
+        setActiveTab('create');
     };
 
     if (!isAuthenticated) {
@@ -77,76 +84,88 @@ export default function Admin() {
         );
     }
 
-    return (
-        <div className="min-h-screen bg-black text-white flex font-sans overflow-hidden">
-            {/* Background Ambience */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/10 to-transparent pointer-events-none" />
+    const NavButton = ({ tab, icon: Icon, label }: { tab: typeof activeTab, icon: any, label: string }) => (
+        <button
+            onClick={() => setActiveTab(tab)}
+            className={`w-full p-3 lg:px-4 rounded-lg flex items-center gap-3 transition-all duration-200 group ${activeTab === tab ? 'bg-blue-600 text-white shadow-md' : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                }`}
+        >
+            <Icon size={20} className={`${activeTab === tab ? 'text-white' : 'text-gray-400 group-hover:text-white'}`} />
+            <span className="hidden lg:block font-medium">{label}</span>
+        </button>
+    );
 
+    return (
+        <div className="min-h-screen bg-[#121212] text-white flex font-sans overflow-hidden">
             {/* Sidebar */}
-            <aside className="w-20 lg:w-64 border-r border-white/10 bg-black/40 backdrop-blur-xl flex flex-col items-center lg:items-stretch py-8 z-20">
-                <div className="px-4 mb-8 hidden lg:block">
-                    <h1 className="text-lg font-bold uppercase tracking-[0.2em] flex items-center gap-2 text-white/90">
-                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                        PettyMayo
+            <aside className="w-20 lg:w-72 bg-[#1E1E1E] flex flex-col items-center lg:items-stretch py-6 z-20 shadow-xl border-r border-[#2C2C2C]">
+                <div className="px-6 mb-8 hidden lg:block">
+                    <h1 className="text-xl font-bold tracking-tight flex items-center gap-3 text-white">
+                        <span className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">P</span>
+                        ADMIN
                     </h1>
-                    <p className="text-[10px] text-white/30 pl-4 mt-1">Admin Configuration v1.12</p>
                 </div>
 
                 <div className="lg:hidden mb-8">
-                    <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
-                        <span className="font-bold text-xl">P</span>
+                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <span className="font-bold text-xl text-white">P</span>
                     </div>
                 </div>
 
-                <nav className="flex-1 flex flex-col gap-2 px-2 lg:px-4">
-                    <button
-                        onClick={() => setActiveTab('create')}
-                        className={`p-3 lg:px-4 rounded-xl flex items-center gap-3 transition-all duration-300 group ${activeTab === 'create' ? 'bg-white text-black shadow-lg shadow-white/5' : 'text-white/50 hover:bg-white/5 hover:text-white'}`}
-                    >
-                        <LayoutDashboard size={20} />
-                        <span className="hidden lg:block font-medium">Create Story</span>
-                        {activeTab === 'create' && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500 hidden lg:block" />}
-                    </button>
+                <nav className="flex-1 flex flex-col gap-1 px-3 lg:px-4">
+                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 hidden lg:block px-2 mt-2">Menu</div>
+                    <NavButton tab="manage" icon={Library} label="Manage Content" />
+                    <NavButton tab="create" icon={LayoutDashboard} label="Story Studio" />
 
-                    <button
-                        onClick={() => setActiveTab('settings')}
-                        className={`p-3 lg:px-4 rounded-xl flex items-center gap-3 transition-all duration-300 group ${activeTab === 'settings' ? 'bg-white text-black shadow-lg shadow-white/5' : 'text-white/50 hover:bg-white/5 hover:text-white'}`}
-                    >
-                        <SettingsIcon size={20} />
-                        <span className="hidden lg:block font-medium">App Settings</span>
-                        {activeTab === 'settings' && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500 hidden lg:block" />}
-                    </button>
+                    <div className="my-4 border-t border-[#2C2C2C] w-full hidden lg:block" />
+
+                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 hidden lg:block px-2">System</div>
+                    <NavButton tab="settings" icon={SettingsIcon} label="Settings" />
                 </nav>
 
-                <div className="px-2 lg:px-4 mt-auto">
+                <div className="px-3 lg:px-4 mt-auto">
                     <button
                         onClick={handleLogout}
-                        className="w-full p-3 lg:px-4 rounded-xl flex items-center gap-3 text-red-400 hover:bg-red-500/10 transition-colors"
+                        className="w-full p-3 rounded-lg flex items-center gap-3 text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                     >
-                        <LogIn size={20} className="rotate-180" />
-                        <span className="hidden lg:block font-medium">Logout</span>
+                        <LogOut size={20} />
+                        <span className="hidden lg:block font-medium">Log Out</span>
                     </button>
                 </div>
             </aside>
 
             {/* Main Content Area */}
-            <main className="flex-1 relative overflow-y-auto">
-                <div className="max-w-5xl mx-auto p-4 lg:p-10 min-h-screen">
-                    <header className="mb-8 flex items-center justify-between">
-                        <div>
-                            <h2 className="text-3xl font-bold text-white mb-1">{activeTab === 'create' ? 'Story Studio' : 'Configuration'}</h2>
-                            <p className="text-white/40">
-                                {activeTab === 'create' ? 'Design and publish new viral content.' : 'Manage application infrastructure and ads.'}
-                            </p>
-                        </div>
+            <main className="flex-1 relative overflow-y-auto bg-[#121212] custom-scrollbar">
+                <div className="max-w-7xl mx-auto p-6 lg:p-10 min-h-screen">
+                    <header className="mb-8">
+                        <h2 className="text-3xl font-bold text-white mb-1">
+                            {activeTab === 'manage' && 'Content Manager'}
+                            {activeTab === 'create' && (editingPost ? 'Edit Story' : 'Story Studio')}
+                            {activeTab === 'settings' && 'System Configuration'}
+                        </h2>
+                        <p className="text-gray-400">
+                            {activeTab === 'manage' && 'Overview of your published content.'}
+                            {activeTab === 'create' && 'Create and distribute new stories.'}
+                            {activeTab === 'settings' && 'Manage application preferences.'}
+                        </p>
                     </header>
 
-                    {activeTab === 'create' ? (
-                        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <Create embedded={true} />
+                    {activeTab === 'manage' && (
+                        <div className="animate-in fade-in duration-300">
+                            <ManageContent embedded={true} onEdit={handleEditPost} />
                         </div>
-                    ) : (
-                        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
+                    )}
+                    {activeTab === 'create' && (
+                        <div className="animate-in fade-in duration-300">
+                            <Create
+                                embedded={true}
+                                editingPost={editingPost || undefined}
+                                onClearEdit={() => setEditingPost(null)}
+                            />
+                        </div>
+                    )}
+                    {activeTab === 'settings' && (
+                        <div className="animate-in fade-in duration-300">
                             <Settings embedded={true} />
                         </div>
                     )}

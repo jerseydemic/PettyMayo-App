@@ -1,25 +1,29 @@
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Save, AlertTriangle, Code, Smartphone, LayoutTemplate } from 'lucide-react';
+import { ArrowLeft, Save, AlertTriangle, Code, Smartphone, LayoutTemplate, BarChart2, Hash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface AppSettings {
     adMobAndroidBannerId: string;
     adMobIosBannerId: string;
-    adSensePublisherId: string; // Deprecated but kept for compatibility if needed
-    adSenseHTML: string; // New: Full HTML/Script injection
+    adSensePublisherId: string;
+    adSenseHTML: string;
+    googleAnalyticsId: string;
     showTopAd: boolean;
     showMiddleAd: boolean;
+    middleAdInterval: number; // New: Paragraph interval
     showBottomAd: boolean;
 }
 
 const DEFAULT_SETTINGS: AppSettings = {
-    adMobAndroidBannerId: 'ca-app-pub-3940256099942544/6300978111', // Test ID
-    adMobIosBannerId: 'ca-app-pub-3940256099942544/2934735716',     // Test ID
+    adMobAndroidBannerId: 'ca-app-pub-3940256099942544/6300978111',
+    adMobIosBannerId: 'ca-app-pub-3940256099942544/2934735716',
     adSensePublisherId: '',
     adSenseHTML: '',
+    googleAnalyticsId: '',
     showTopAd: false,
     showMiddleAd: false,
+    middleAdInterval: 2,
     showBottomAd: true,
 };
 
@@ -39,7 +43,7 @@ export default function Settings({ embedded = false }: SettingsProps) {
         }
     }, []);
 
-    const handleChange = (field: keyof AppSettings, value: string | boolean) => {
+    const handleChange = (field: keyof AppSettings, value: string | boolean | number) => {
         setSettings(prev => ({ ...prev, [field]: value }));
         setSaved(false);
     };
@@ -51,171 +55,199 @@ export default function Settings({ embedded = false }: SettingsProps) {
     };
 
     return (
-        <div className={`min-h-full bg-transparent text-white flex flex-col font-sans ${embedded ? 'min-h-0' : ''}`}>
-            {/* Legacy Header for non-embedded view */}
+        <div className={`min-h-full flex flex-col font-sans ${embedded ? 'min-h-0' : 'bg-[#121212] text-white'}`}>
             {!embedded && (
-                <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-xl px-4 py-4 flex items-center border-b border-white/10">
-                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-white/90 hover:bg-white/10 rounded-full">
+                <div className="sticky top-0 z-20 bg-[#1e1e1e] shadow-md px-4 py-4 flex items-center border-b border-[#2c2c2c]">
+                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-gray-400 hover:text-white rounded-full">
                         <ArrowLeft size={24} />
                     </button>
-                    <span className="ml-4 font-bold uppercase tracking-widest text-lg">App Settings</span>
+                    <span className="ml-4 font-bold uppercase tracking-widest text-lg text-white">App Settings</span>
                 </div>
             )}
 
-            <div className={`flex-1 flex flex-col gap-8 ${embedded ? '' : 'p-6 max-w-lg mx-auto w-full'}`}>
+            <div className={`flex-1 flex flex-col gap-6 ${embedded ? '' : 'p-6 max-w-lg mx-auto w-full'}`}>
 
-                {/* Section: Native AdMob */}
-                <section className="space-y-4 animate-in slide-in-from-bottom duration-500">
-                    <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-blue-500/10 rounded-lg">
-                            <Smartphone size={20} className="text-blue-400" />
-                        </div>
-                        <div>
-                            <h2 className="text-lg font-bold text-white">Native App Ads (AdMob)</h2>
-                            <p className="text-xs text-white/40">Banner IDs for Android & iOS</p>
-                        </div>
+                {/* Section: Analytics */}
+                <section className="bg-[#1e1e1e] rounded-lg shadow-lg border border-[#2c2c2c] overflow-hidden">
+                    <div className="p-4 border-b border-[#2c2c2c] flex items-center gap-3 bg-[#252525]">
+                        <BarChart2 size={18} className="text-orange-500" />
+                        <h2 className="text-sm font-bold text-gray-200 uppercase tracking-wider">Analytics</h2>
                     </div>
+                    <div className="p-6">
+                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">
+                            GA4 Measurement ID
+                        </label>
+                        <input
+                            value={settings.googleAnalyticsId}
+                            onChange={(e) => handleChange('googleAnalyticsId', e.target.value)}
+                            className="w-full bg-[#121212] text-white text-sm p-3 rounded border border-[#333] focus:border-orange-500 focus:outline-none transition-colors font-mono placeholder:text-gray-500"
+                            placeholder="G-XXXXXXXXXX"
+                        />
+                    </div>
+                </section>
 
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-white/60 uppercase tracking-wider flex items-center gap-2">
+                {/* Section: Native Ads */}
+                <section className="bg-[#1e1e1e] rounded-lg shadow-lg border border-[#2c2c2c] overflow-hidden">
+                    <div className="p-4 border-b border-[#2c2c2c] flex items-center gap-3 bg-[#252525]">
+                        <Smartphone size={18} className="text-blue-500" />
+                        <h2 className="text-sm font-bold text-gray-200 uppercase tracking-wider">Native AdMob</h2>
+                    </div>
+                    <div className="p-6 space-y-4">
+                        <div>
+                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">
                                 Android Banner ID
                             </label>
                             <input
                                 value={settings.adMobAndroidBannerId}
                                 onChange={(e) => handleChange('adMobAndroidBannerId', e.target.value)}
-                                className="w-full bg-black/40 text-sm p-4 rounded-xl border border-white/5 focus:border-blue-500/50 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all font-mono text-gray-300 placeholder:text-white/10"
+                                className="w-full bg-[#121212] text-white text-sm p-3 rounded border border-[#333] focus:border-blue-500 focus:outline-none transition-colors font-mono placeholder:text-gray-500"
                                 placeholder="ca-app-pub-..."
                             />
                         </div>
-
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-white/60 uppercase tracking-wider flex items-center gap-2">
+                        <div>
+                            <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">
                                 iOS Banner ID
                             </label>
                             <input
                                 value={settings.adMobIosBannerId}
                                 onChange={(e) => handleChange('adMobIosBannerId', e.target.value)}
-                                className="w-full bg-black/40 text-sm p-4 rounded-xl border border-white/5 focus:border-blue-500/50 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all font-mono text-gray-300 placeholder:text-white/10"
+                                className="w-full bg-[#121212] text-white text-sm p-3 rounded border border-[#333] focus:border-blue-500 focus:outline-none transition-colors font-mono placeholder:text-gray-500"
                                 placeholder="ca-app-pub-..."
                             />
                         </div>
                     </div>
                 </section>
 
-                {/* Section: Web/HTML Ads */}
-                <section className="space-y-4 animate-in slide-in-from-bottom duration-500 delay-100">
-                    <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-purple-500/10 rounded-lg">
-                            <Code size={20} className="text-purple-400" />
-                        </div>
-                        <div>
-                            <h2 className="text-lg font-bold text-white">Web & Injection Ads</h2>
-                            <p className="text-xs text-white/40">Google AdSense or Custom Scripts</p>
-                        </div>
+                {/* Section: Web / Injection */}
+                <section className="bg-[#1e1e1e] rounded-lg shadow-lg border border-[#2c2c2c] overflow-hidden">
+                    <div className="p-4 border-b border-[#2c2c2c] flex items-center gap-3 bg-[#252525]">
+                        <Code size={18} className="text-purple-500" />
+                        <h2 className="text-sm font-bold text-gray-200 uppercase tracking-wider">Web Injection</h2>
                     </div>
-
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-white/60 uppercase tracking-wider flex items-center gap-2">
-                                Global AdSense / Script HTML
-                            </label>
-                            <textarea
-                                value={settings.adSenseHTML}
-                                onChange={(e) => handleChange('adSenseHTML', e.target.value)}
-                                className="w-full h-32 bg-black/40 text-sm p-4 rounded-xl border border-white/5 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all font-mono text-gray-300 placeholder:text-white/10 resize-none leading-relaxed"
-                                placeholder={`<script async src="..."></script>\n<ins class="adsbygoogle" ...></ins>`}
-                            />
-                            <p className="text-[10px] text-white/30">Paste your full AdSense embed code, or any other HTML to inject. This renders in WebView/Web environments.</p>
-                        </div>
+                    <div className="p-6">
+                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">
+                            Global Scripts / AdSense HTML
+                        </label>
+                        <textarea
+                            value={settings.adSenseHTML}
+                            onChange={(e) => handleChange('adSenseHTML', e.target.value)}
+                            className="w-full h-32 bg-[#121212] text-white text-sm p-3 rounded border border-[#333] focus:border-purple-500 focus:outline-none transition-colors font-mono placeholder:text-gray-500 resize-none"
+                            placeholder="<script>...</script>"
+                        />
                     </div>
                 </section>
 
                 {/* Section: Placements */}
-                <section className="space-y-4 animate-in slide-in-from-bottom duration-500 delay-200">
-                    <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-green-500/10 rounded-lg">
-                            <LayoutTemplate size={20} className="text-green-400" />
-                        </div>
-                        <div>
-                            <h2 className="text-lg font-bold text-white">Ad Placements</h2>
-                            <p className="text-xs text-white/40">Control visibility across app</p>
-                        </div>
+                <section className="bg-[#1e1e1e] rounded-lg shadow-lg border border-[#2c2c2c] overflow-hidden">
+                    <div className="p-4 border-b border-[#2c2c2c] flex items-center gap-3 bg-[#252525]">
+                        <LayoutTemplate size={18} className="text-green-500" />
+                        <h2 className="text-sm font-bold text-gray-200 uppercase tracking-wider">Ad Placements</h2>
                     </div>
-
-                    <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden divide-y divide-white/5">
+                    <div className="flex flex-col gap-4 p-4 bg-[#1e1e1e]">
                         <PlacementToggle
                             label="Top Sticky Banner"
-                            description="Fixed to the top of the screen."
+                            description="Fixed to top of screen"
                             checked={settings.showTopAd}
                             onChange={(v) => handleChange('showTopAd', v)}
-                            tag="Sticky"
-                            tagColor="blue"
                         />
-                        <PlacementToggle
-                            label="Middle Content"
-                            description="Injected after paragraph 2."
-                            checked={settings.showMiddleAd}
-                            onChange={(v) => handleChange('showMiddleAd', v)}
-                            tag="Inline"
-                            tagColor="purple"
-                        />
+
+                        <div
+                            className={`rounded-xl border transition-all duration-200 overflow-hidden ${settings.showMiddleAd ? 'bg-[#252525] border-purple-500/50 shadow-lg shadow-purple-900/10' : 'bg-[#121212] border-[#333] hover:border-[#555]'}`}
+                        >
+                            <div
+                                className="p-4 flex items-center justify-between cursor-pointer group"
+                                onClick={() => handleChange('showMiddleAd', !settings.showMiddleAd)}
+                            >
+                                <div>
+                                    <div className={`font-bold transition-colors ${settings.showMiddleAd ? 'text-purple-400' : 'text-white group-hover:text-purple-200'}`}>Middle Content</div>
+                                    <div className="text-xs text-gray-500 mt-1">Injects ad between paragraphs</div>
+                                </div>
+                                <div className={`w-12 h-7 rounded-full transition-colors relative ${settings.showMiddleAd ? 'bg-purple-600' : 'bg-[#333]'}`}>
+                                    <div className={`absolute top-1 left-1 bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-200 ${settings.showMiddleAd ? 'translate-x-5' : 'translate-x-0'}`} />
+                                </div>
+                            </div>
+
+                            {/* Interval Input - Expanded Area */}
+                            {settings.showMiddleAd && (
+                                <div className="px-4 pb-4 pt-0 animate-in slide-in-from-top-2 duration-200">
+                                    <div className="bg-[#1a1a1a] p-3 rounded-lg border border-purple-500/20 flex items-center gap-4">
+                                        <Hash size={16} className="text-purple-500" />
+                                        <div className="flex-1">
+                                            <label className="text-xs font-bold text-gray-300 block uppercase tracking-wider">Injection Interval</label>
+                                            <span className="text-[10px] text-gray-500">Inject ad after every {settings.middleAdInterval} paragraphs</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() => handleChange('middleAdInterval', Math.max(1, settings.middleAdInterval - 1))}
+                                                className="w-8 h-8 rounded hover:bg-[#333] flex items-center justify-center text-gray-400"
+                                            >
+                                                -
+                                            </button>
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                max="20"
+                                                value={settings.middleAdInterval}
+                                                onChange={(e) => handleChange('middleAdInterval', parseInt(e.target.value) || 1)}
+                                                className="w-12 bg-[#252525] text-white font-bold text-center p-1 rounded border border-[#444] focus:border-purple-500 outline-none"
+                                            />
+                                            <button
+                                                onClick={() => handleChange('middleAdInterval', Math.min(20, settings.middleAdInterval + 1))}
+                                                className="w-8 h-8 rounded hover:bg-[#333] flex items-center justify-center text-gray-400"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                         <PlacementToggle
                             label="Bottom Sticky Banner"
-                            description="Fixed to the bottom of the screen."
+                            description="Fixed to bottom of screen"
                             checked={settings.showBottomAd}
                             onChange={(v) => handleChange('showBottomAd', v)}
-                            tag="Sticky"
-                            tagColor="blue"
                         />
                     </div>
                 </section>
 
                 <div className="mt-4 pb-8">
-                    <div className="flex gap-3 bg-yellow-500/5 border border-yellow-500/20 p-4 rounded-xl mb-6">
-                        <AlertTriangle className="text-yellow-500 shrink-0" size={20} />
-                        <p className="text-xs text-yellow-200/60 leading-relaxed">
-                            <strong>Note:</strong> AdMob IDs update after app restart. HTML scripts apply on next page load.
+                    <div className="flex gap-3 bg-yellow-900/20 border border-yellow-700/30 p-4 rounded-lg mb-6">
+                        <AlertTriangle className="text-yellow-600 shrink-0" size={20} />
+                        <p className="text-xs text-yellow-500/80 leading-relaxed">
+                            <strong>Note:</strong> Restart app to apply native AdMob ID changes.
                         </p>
                     </div>
 
                     <button
                         onClick={handleSave}
-                        className={`w-full py-4 rounded-xl font-bold text-lg shadow-lg flex items-center justify-center gap-3 transition-all active:scale-[0.99] ${saved ? 'bg-green-500 text-black' : 'bg-white text-black hover:bg-gray-200'}`}
+                        className={`w-full py-3 rounded-lg font-bold text-sm uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] ${saved ? 'bg-green-600 text-white' : 'bg-white text-black hover:bg-gray-200'}`}
                     >
-                        <Save size={20} />
-                        {saved ? 'Settings Saved!' : 'Save Configuration'}
+                        <Save size={18} />
+                        {saved ? 'Saved Successfully' : 'Save Changes'}
                     </button>
                 </div>
-
             </div>
         </div>
     );
 }
 
-function PlacementToggle({ label, description, checked, onChange, tag, tagColor }: {
-    label: string, description: string, checked: boolean, onChange: (v: boolean) => void, tag: string, tagColor: string
+function PlacementToggle({ label, description, checked, onChange }: {
+    label: string, description: string, checked: boolean, onChange: (v: boolean) => void
 }) {
-    // Map string color to full tailwind classes for the tag
-    const tagClasses = tagColor === 'blue'
-        ? 'bg-blue-500/20 text-blue-300'
-        : 'bg-purple-500/20 text-purple-300';
-
     return (
-        <div className="p-5 flex items-center justify-between hover:bg-white/5 transition-colors cursor-pointer" onClick={() => onChange(!checked)}>
-            <div className="pr-4">
-                <div className="font-semibold text-white flex items-center gap-2">
-                    {label}
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full ${tagClasses}`}>{tag}</span>
-                </div>
-                <div className="text-xs text-white/40 mt-1 leading-relaxed">
-                    {description}
-                </div>
+        <div
+            className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between group ${checked ? 'bg-[#252525] border-blue-500/50 shadow-lg shadow-blue-900/10' : 'bg-[#121212] border-[#333] hover:border-[#555]'}`}
+            onClick={() => onChange(!checked)}
+        >
+            <div>
+                <div className={`font-bold transition-colors ${checked ? 'text-blue-400' : 'text-white group-hover:text-blue-200'}`}>{label}</div>
+                <div className="text-xs text-gray-500 mt-1">{description}</div>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer shrink-0 pointer-events-none">
-                <input type="checkbox" checked={checked} readOnly className="sr-only peer" />
-                <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500 transition-colors"></div>
-            </label>
+            <div className={`w-12 h-7 rounded-full transition-colors relative ${checked ? 'bg-blue-600' : 'bg-[#333]'}`}>
+                <div className={`absolute top-1 left-1 bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-200 ${checked ? 'translate-x-5' : 'translate-x-0'}`} />
+            </div>
         </div>
     );
 }

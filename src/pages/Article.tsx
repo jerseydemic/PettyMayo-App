@@ -11,7 +11,7 @@ import { STATIC_POSTS, type Post } from '../data/posts';
 export default function Article() {
     const { state } = useLocation();
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { id, slug } = useParams();
     const [post, setPost] = useState<Post | null>(null);
 
     // Dynamic Settings State
@@ -20,31 +20,57 @@ export default function Article() {
         adMobIosBannerId: 'ca-app-pub-3940256099942544/2934735716',
         showTopAd: false,
         showMiddleAd: false,
-        showBottomAd: true
+        showBottomAd: true,
+        middleAdInterval: 2
     });
+
+    useEffect(() => {
+        if (!post) return;
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            const stored = localStorage.getItem('petty_mayo_analytics');
+            const data = stored ? JSON.parse(stored) : { totalViews: 0, articleViews: {}, visitsByDate: {} };
+
+            // Update Total
+            data.totalViews = (data.totalViews || 0) + 1;
+
+            // Update Daily
+            data.visitsByDate = data.visitsByDate || {};
+            data.visitsByDate[today] = (data.visitsByDate[today] || 0) + 1;
+
+            // Update Article Specific
+            data.articleViews = data.articleViews || {};
+            // Track by ID for consistency if possible, else slug
+            const key = post.id || post.slug;
+            data.articleViews[key] = (data.articleViews[key] || 0) + 1;
+
+            localStorage.setItem('petty_mayo_analytics', JSON.stringify(data));
+        } catch (e) { console.error("Analytics Error", e); }
+    }, [post?.id, post?.slug]);
 
     useEffect(() => {
         // 1. Resolve Post Data
         if (state?.post) {
             setPost(state.post);
         } else {
-            // Fallback for direct URL access
-            const found = STATIC_POSTS.find(p => p.id === id);
-            if (found) setPost(found);
-            else {
-                // Check local storage for custom posts
-                const local = localStorage.getItem('custom_posts');
-                if (local) {
-                    const customPosts = JSON.parse(local);
-                    const customFound = customPosts.find((p: Post) => p.id === id);
-                    if (customFound) setPost(customFound);
-                }
+            // Fetch All Posts
+            const local = localStorage.getItem('local_posts');
+            const customPosts = local ? JSON.parse(local) : [];
+            const allPosts = [...customPosts, ...STATIC_POSTS];
+
+            let found;
+            if (slug) {
+                found = allPosts.find((p: Post) => p.slug === slug);
+            } else if (id) {
+                found = allPosts.find((p: Post) => p.id === id);
             }
+
+            if (found) setPost(found);
         }
 
         // 2. Load Settings & Initialize Ads
         const loadSettingsAndAds = async () => {
-            const stored = localStorage.getItem('app_settings');
+            const stored = localStorage.getItem('admin_settings');
             const currentSettings = stored ? { ...settings, ...JSON.parse(stored) } : settings;
             setSettings(currentSettings); // Update local state for rendering
 
@@ -103,11 +129,14 @@ export default function Article() {
         if (!settings.showMiddleAd) return <p className="text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap font-light text-lg">{post.content}</p>;
 
         const paragraphs = (post.content || '').split('\n\n');
-        if (paragraphs.length < 3) return <p className="text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap font-light text-lg">{post.content || ''}</p>;
+        // Use custom interval or default to 2
+        const injectionIndex = (settings as any).middleAdInterval || 2;
+
+        if (paragraphs.length <= injectionIndex) return <p className="text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap font-light text-lg">{post.content || ''}</p>;
 
         return (
             <>
-                {paragraphs.slice(0, 2).map((p, i) => (
+                {paragraphs.slice(0, injectionIndex).map((p, i) => (
                     <p key={i} className="text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap font-light text-lg">{p}</p>
                 ))}
 
@@ -119,8 +148,8 @@ export default function Article() {
                     </div>
                 </div>
 
-                {paragraphs.slice(2).map((p, i) => (
-                    <p key={i + 2} className="text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap font-light text-lg">{p}</p>
+                {paragraphs.slice(injectionIndex).map((p, i) => (
+                    <p key={i + injectionIndex} className="text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap font-light text-lg">{p}</p>
                 ))}
             </>
         );
@@ -139,15 +168,18 @@ export default function Article() {
                 </div>
             )}
 
-            {/* Liquid Glass Header */}
-            <div className="sticky top-0 z-20 bg-black/60 backdrop-blur-xl px-4 py-4 flex items-center justify-between border-b border-white/10">
-                <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-white/90 hover:bg-white/10 rounded-full transition-colors">
-                    <ArrowLeft size={24} />
+            {/* Liquid Glass Header (Absolute Overlay) */}
+            <div className="absolute top-0 w-full z-50 px-4 py-4 flex items-center justify-between pointer-events-none">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all pointer-events-auto border border-white/10"
+                >
+                    <ArrowLeft size={20} />
                 </button>
-                <div className="flex gap-2">
+                <div className="flex gap-3 pointer-events-auto">
                     <button onClick={() => {
                         Browser.open({ url: 'https://instagram.com/realpettymay0' });
-                    }} className="p-2 text-white/70 hover:text-white transition-colors">
+                    }} className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
                         <Instagram size={20} />
                     </button>
                     <button
@@ -175,7 +207,7 @@ export default function Article() {
                                 alert("Link copied to clipboard! 📋");
                             }
                         }}
-                        className="p-2 text-white/70 hover:text-white transition-colors">
+                        className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
                         <Share size={20} />
                     </button>
                 </div>
@@ -233,12 +265,7 @@ export default function Article() {
                         <p className="text-xs text-white/30 uppercase tracking-[0.2em]">Real Petty Mayo • 2024</p>
                     </div>
 
-                    {/* Web Ad Placeholder (Bottom - if enabled) */}
-                    {Capacitor.getPlatform() === 'web' && settings.showBottomAd && (
-                        <div className="mt-8 w-full h-[50px] bg-gray-800 flex items-center justify-center text-gray-500 text-xs uppercase tracking-widest border border-white/5 rounded-lg">
-                            Bottom Banner Ad Space
-                        </div>
-                    )}
+
                 </div>
             </article>
         </div>

@@ -1,16 +1,19 @@
 export interface Post {
     id: string;
     title: string;
+    slug: string;       // valid-url-slug
+    category: string;   // news, gossip, opinion, etc.
     thumbnail: string;
     articleUrl: string; // Keep for fallback or external sharing
     content?: string;   // Internal article content
     tweetId?: string;   // Optional Tweet Embed ID
+    timestamp?: number; // Creation/Update timestamp
 }
 
 
 export const fetchPosts = async (): Promise<Post[]> => {
     // 1. Get Custom Posts from LocalStorage
-    const saved = localStorage.getItem('custom_posts');
+    const saved = localStorage.getItem('local_posts'); // Fixed key to match other files
     const customPosts: Post[] = saved ? JSON.parse(saved) : [];
 
     // 2. Return merged list (Custom first)
@@ -21,6 +24,8 @@ export const STATIC_POSTS: Post[] = [
     {
         id: '1',
         title: 'Disney Evil Queen Fired',
+        slug: 'disney-evil-queen-fired-viral-performer',
+        category: 'entertainment',
         thumbnail: '/evil_queen.jpg',
         articleUrl: 'https://instagram.com/realpettymay0',
         tweetId: '2010893597907058894',
@@ -37,6 +42,8 @@ Is this the end of the reign for Disney's sassiest villain? Or just the beginnin
     {
         id: '2',
         title: 'Kiefer Sutherland Arrested',
+        slug: 'kiefer-sutherland-arrested-assault-charges',
+        category: 'news',
         thumbnail: '/kiefer.png',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `Breaking: Actor Kiefer Sutherland has been arrested for an alleged assault on a rideshare driver. 🚨
@@ -50,6 +57,8 @@ Sutherland's reps have yet to comment. This isn't his first run-in with the law,
     {
         id: '3',
         title: 'Trump Flips Off Ford Worker',
+        slug: 'trump-flips-off-ford-worker-viral-photo',
+        category: 'politics',
         thumbnail: '/trump_flip.png',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `Things got HEATED at the Ford plant today. Former President Trump was caught on camera appearing to flip off a worker who shouted "Pedophile Protector" at him during his tour. 🖕🇺🇸
@@ -63,6 +72,8 @@ It's clear the campaign trail is going to be messier than ever.`
     {
         id: '4',
         title: 'Ford Worker Suspended',
+        slug: 'ford-worker-suspended-trump-heckler',
+        category: 'politics',
         thumbnail: '/ford_worker.png',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `The Ford worker who shouted at Donald Trump has been suspended. 🛑
@@ -76,6 +87,8 @@ The worker is becoming a folk hero to some circles online, while others are call
     {
         id: '5',
         title: 'Kristy Scott Files for Name Change',
+        slug: 'kristy-scott-name-change-divorce-update',
+        category: 'gossip',
         thumbnail: '/kristy.png',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `It's officially over. Kristy Scott has filed legal docs to drop Desmond's surname amid their ongoing divorce proceedings. 💍💔
@@ -89,6 +102,8 @@ Sources close to Kristy say she is "relieved" and ready to move forward. "She wa
     {
         id: '6',
         title: 'Bethenny Frankel Battles Infection',
+        slug: 'bethenny-frankel-st-barths-infection-horror',
+        category: 'reality-tv',
         thumbnail: '/bethenny.png',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `**ST. BARTHS —** What was supposed to be a dream New Year's Eve getaway turned into a medical nightmare for reality TV mogul Bethenny Frankel, igniting a firestorm of online speculation and a personal vow to never trust hotel laundry again.
@@ -130,6 +145,8 @@ As the swelling subsides, the internet debate rages on. Was it truly the laundry
     {
         id: '7',
         title: 'Viral Stranger Things Theory',
+        slug: 'stranger-things-season-5-viral-secret-episode-theory',
+        category: 'entertainment',
         thumbnail: '/stranger_things.jpg',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `**HAWKINS, IN —** The wait for *Stranger Things* Season 5 has driven the fandom into a frenzy, birthing one of the most elaborate and contentious theories in the show's history: The "Secret Episode" Theory, also known online as "Conformity Gate."
@@ -167,6 +184,8 @@ Whether "The Conformity" is a masterpiece of guerrilla marketing or a mass delus
     {
         id: '8',
         title: 'Heartbreak: Advocate Passes Away',
+        slug: 'midwife-advocate-janell-green-smith-dead-at-31',
+        category: 'news',
         thumbnail: '/midwife.jpg',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `**SPARTANBURG, SC —** The maternal health community is reeling today following the devastating news of the passing of Dr. Janell Green Smith, a 31-year-old certified nurse-midwife and fierce advocate who dedicated her life to saving Black mothers, only to succumb to the very disparities she fought against.
@@ -200,6 +219,8 @@ A GoFundMe established to support Daiquan and baby Eden raised over $150,000 in 
     {
         id: '9',
         title: 'ICE Agents Spark Outrage',
+        slug: 'ice-agents-dine-and-raid-restaurant-scandal',
+        category: 'politics',
         thumbnail: '/ice_agents.jpg',
         articleUrl: 'https://instagram.com/realpettymay0',
         content: `**WILLMAR, MN —** A quiet Tuesday afternoon in rural Minnesota has become the flashpoint for a national debate on immigration enforcement ethics after reports emerged that federal ICE agents dined at a family-owned Mexican restaurant mere hours before raiding it.
@@ -218,7 +239,7 @@ This time, there were no pleasantries. The agents reportedly executed a targeted
 
 The news of the "dine-and-raid" tactic spread instantly through Willmar, a town with a significant Latino population. Residents gathered outside the restaurant the following morning in protest, holding signs that read "We Feed You, You Arrest Us" and "No Humans Are Illegal."
 
-"It's psychological warfare," said local activist Maria Gonzales. "To sit there, look these people in the eye, eat the food they made with their hands, and then come back to rip them away from their families? It's chilling. It sends a message that you can't even feel safe serving your community."
+"It psychological warfare," said local activist Maria Gonzales. "To sit there, look these people in the eye, eat the food they made with their hands, and then come back to rip them away from their families? It's chilling. It sends a message that you can't even feel safe serving your community."
 
 The Lutheran Church across the street from the restaurant has opened its doors as a sanctuary for terrified families, many of whom are now keeping their children home from school, fearing further raids.
 
