@@ -13,6 +13,7 @@ export default function Create() {
     const [processStage, setProcessStage] = useState<number>(0); // 0: Idle, 1: Extract, 2: Research, 3: Generate
     const [generatedTitle, setGeneratedTitle] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
+    const [tweetInput, setTweetInput] = useState('');
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -39,27 +40,52 @@ export default function Create() {
         setProcessStage(3); // Generate
         await new Promise(r => setTimeout(r, 2000));
 
-        // Mock Generation
+        // Mock Generation (Long Form - 550+ Words)
         setGeneratedTitle("TEA SPILLED: The Receipts Are In ☕️");
         setGeneratedContent(`Matches are burnt, bridges are crisp, and honey... the tea is SCALDING today. 🔥
 
-We just got the exclusive scoop on this situation and let me tell you, it is MESSY. Sources close to the drama are saying that this was not accidental.
+We just got the exclusive scoop on this situation and let me tell you, it is MESSY. Sources close to the drama are saying that this was not accidental. It wasn't just a slip-up; it was a calculated move that has left everyone in their inner circle absolutely reeling.
 
-"I have never seen anything like it," one insider whispered. "It's giving chaos."
+"I have never seen anything like it," one insider whispered to us exclusively. "It's giving chaos. It's giving destruction. It's giving exactly what we expected from them, but multiplied by ten."
 
-Stay petty, because we are digging for more. 💅`);
+But let's back up a second. To understand the gravity of this situation, you have to look at the history. This isn't the first time we've seen this kind of behavior, but it is certainly the most public. For years, fans have speculated about the tension bubbling beneath the surface. We've seen the cryptic tweets, the unfollows, the side-eyes at red carpet events. But this? This is the main event.
+
+The internet, naturally, is having a field day. Twitter (or X, whatever we're calling it this week) is absolutely lit up with theories. Some are saying it's a PR stunt designed to distract from other news. Others are convinced it's genuine, raw emotion spilling over after years of keeping it together.
+
+"It's absolutely wild," one commentator noted. "You think you know a person, and then they go and do this. It changes everything."
+
+And what about the fallout? Brands are supposedly already scrambling. Sponsorships might be on the line. When you build a brand on a specific image, shattering that image comes with a heavy price tag. We reached out to their reps for comment, and the silence? It's deafening. Usually, we'd get a "no comment" or a generic denial. Today? Crickets. That tells you everything you need to know.
+
+Let's dive deeper into the specifics. The image you see above? That's the smoking gun. Analyzing the background, the timing, the people present—it all paints a picture of a night gone wrong. Or right, depending on whose side you're on.
+
+We spoke to a body language expert who analyzed the footage leading up to this moment. "There's high anxiety," they confirmed. "Micro-expressions of contempt and fear. This wasn't a happy gathering."
+
+So where do we go from here? The court of public opinion is already in session, and the verdict is looking guilty. But as with all great celebrity scandals, the comeback is often just as meticulously planning as the downfall. Will they issue an apology video? Will they go silent and let it blow over? Or will they double down and go full villain era?
+
+Personally, I'm rooting for the villain era. It makes for better headlines. 💅
+
+Stay petty, because we are digging for more. We have notifications on, alerts set, and our DMs are open. If you know something, say something. But for now, sip slowly. This tea is hot enough to burn.`);
 
         setProcessStage(4); // Done
         setTimeout(() => setStep('preview'), 500);
     };
 
     const savePost = () => {
+        // Extract Tweet ID if a URL is pasted
+        let finalTweetId = undefined;
+        if (tweetInput.trim()) {
+            // Simple extraction logic: looks for the last numeric segment or takes the whole string
+            const match = tweetInput.match(/status\/(\d+)/);
+            finalTweetId = match ? match[1] : tweetInput.trim();
+        }
+
         const newPost: Post = {
             id: Date.now().toString(),
             title: generatedTitle,
             thumbnail: image || '',
             articleUrl: 'https://instagram.com/realpettymay0',
-            content: generatedContent
+            content: generatedContent,
+            tweetId: finalTweetId
         };
 
         // Save to LocalStorage
@@ -157,6 +183,18 @@ Stay petty, because we are digging for more. 💅`);
                                 className="bg-transparent text-xl font-bold border-b border-white/20 pb-2 focus:outline-none focus:border-white"
                                 placeholder="Title"
                             />
+
+                            {/* Tweet Input */}
+                            <div className="flex flex-col gap-2">
+                                <label className="text-xs text-white/50 uppercase tracking-wider">Embed Tweet (Optional)</label>
+                                <input
+                                    value={tweetInput}
+                                    onChange={(e) => setTweetInput(e.target.value)}
+                                    className="bg-black/20 text-blue-400 text-sm p-3 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50"
+                                    placeholder="Paste Tweet Link or ID"
+                                />
+                            </div>
+
                             <textarea
                                 value={generatedContent}
                                 onChange={(e) => setGeneratedContent(e.target.value)}

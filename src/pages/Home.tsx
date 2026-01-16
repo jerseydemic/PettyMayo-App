@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Browser } from '@capacitor/browser';
 import { fetchPosts, type Post } from '../data/posts';
-import { Loader2, Instagram, Facebook } from 'lucide-react';
+import { Loader2, Instagram, Facebook, Settings } from 'lucide-react';
 
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -30,8 +30,12 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-black text-white relative flex flex-col">
             {/* Liquid Glass Header */}
-            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 flex justify-center items-center">
+            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 flex justify-between items-center">
+                <div className="w-6" /> {/* Spacer */}
                 <h1 className="text-xl font-bold tracking-tight uppercase text-white/90 drop-shadow-sm">Petty Mayo</h1>
+                <button onClick={() => navigate('/settings')} className="text-white/50 hover:text-white transition-colors">
+                    <Settings size={20} />
+                </button>
             </header>
 
             {/* Content */}

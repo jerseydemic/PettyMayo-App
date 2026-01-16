@@ -17,7 +17,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
     return [...customPosts, ...STATIC_POSTS];
 };
 
-const STATIC_POSTS: Post[] = [
+export const STATIC_POSTS: Post[] = [
     {
         id: '1',
         title: 'Disney Evil Queen Fired',
