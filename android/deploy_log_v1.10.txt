@@ -1,0 +1,380 @@
+Top level ::CompositeIO is deprecated, require 'multipart/post' and use `Multipart::Post::CompositeReadIO` instead!
+Top level ::Parts is deprecated, require 'multipart/post' and use `Multipart::Post::Parts` instead!
+[16:24:39]: [33mGet started using a Gemfile for fastlane https://docs.fastlane.tools/getting-started/ios/setup/#use-a-gemfile[0m
+[16:24:40]: [32m------------------------------[0m
+[16:24:40]: [32m--- Step: default_platform ---[0m
+[16:24:40]: [32m------------------------------[0m
+[16:24:40]: [32mDriving the lane 'android deploy' 🚀[0m
+[16:24:40]: [32m---------------------------[0m
+[16:24:40]: [32m--- Step: bundleRelease ---[0m
+[16:24:40]: [32m---------------------------[0m
+[16:24:40]: [36m$ /Users/kingdemic/Desktop/PettyMayo_Android/android/gradlew bundleRelease -p . -Pandroid.injected.signing.store.file=/Users/kingdemic/Desktop/PettyMayo_Android/android/app/release.keystore -Pandroid.injected.signing.store.password=TrainerApp123\! -Pandroid.injected.signing.key.alias=strategy-trainer -Pandroid.injected.signing.key.password=TrainerApp123\![0m
+[16:24:42]: ▸ [35m> Configure project :app[0m
+[16:24:42]: ▸ [35mWARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.[0m
+[16:24:43]: ▸ [35m> Configure project :capacitor-cordova-android-plugins[0m
+[16:24:43]: ▸ [35mWARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.[0m
+[16:24:43]: ▸ [35m> Task :app:preBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :app:preReleaseBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-android:preBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-android:preReleaseBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-android:processReleaseNavigationResources UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-browser:preBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-browser:preReleaseBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-browser:processReleaseNavigationResources UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-community-admob:preBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-community-admob:preReleaseBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-community-admob:processReleaseNavigationResources UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-cordova-android-plugins:preBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-cordova-android-plugins:preReleaseBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-cordova-android-plugins:processReleaseNavigationResources[0m
+[16:24:43]: ▸ [35m> Task :capacitor-share:preBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-share:preReleaseBuild UP-TO-DATE[0m
+[16:24:43]: ▸ [35m> Task :capacitor-share:processReleaseNavigationResources[0m
+[16:24:44]: ▸ [35m> Task :app:processReleaseNavigationResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:compileReleaseNavigationResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:generateReleaseResValues UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:generateReleaseResValues UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:generateReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:packageReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:generateReleaseResValues UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:generateReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:packageReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:generateReleaseResValues UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:generateReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:packageReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:generateReleaseResValues[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:generateReleaseResources[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:packageReleaseResources[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:generateReleaseResValues[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:generateReleaseResources[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:packageReleaseResources[0m
+[16:24:44]: ▸ [35m> Task :app:mapReleaseSourceSetPaths UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:generateReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:mergeReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:createReleaseCompatibleScreenManifests[0m
+[16:24:44]: ▸ [35m> Task :app:extractDeepLinksRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:extractDeepLinksRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:processReleaseManifest UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:extractDeepLinksRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:processReleaseManifest UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:extractDeepLinksRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:processReleaseManifest UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:extractDeepLinksRelease[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:extractDeepLinksRelease[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:writeReleaseAarMetadata UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:processReleaseManifest[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:writeReleaseAarMetadata UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:writeReleaseAarMetadata UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:writeReleaseAarMetadata[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:processReleaseManifest[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:writeReleaseAarMetadata[0m
+[16:24:44]: ▸ [35m> Task :app:processReleaseMainManifest[0m
+[16:24:44]: ▸ [35m> Task :app:processReleaseManifest[0m
+[16:24:44]: ▸ [35m> Task :app:processApplicationManifestReleaseForBundle[0m
+[16:24:44]: ▸ [35m> Task :app:packageReleaseResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:parseReleaseLocalResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:compileReleaseLibraryResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:parseReleaseLocalResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:generateReleaseRFile UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:compileReleaseLibraryResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :app:checkReleaseAarMetadata[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:parseReleaseLocalResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:generateReleaseRFile UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:compileReleaseLibraryResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:parseReleaseLocalResources UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:generateReleaseRFile UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:compileReleaseLibraryResources[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:compileReleaseLibraryResources[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:parseReleaseLocalResources[0m
+[16:24:44]: ▸ [35m> Task :app:extractReleaseVersionControlInfo UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:javaPreCompileRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:parseReleaseLocalResources[0m
+[16:24:44]: ▸ [35m> Task :capacitor-cordova-android-plugins:generateReleaseRFile[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:generateReleaseRFile[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:compileReleaseJavaWithJavac UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:bundleLibCompileToJarRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:checkKotlinGradlePluginConfigurationErrors SKIPPED[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:compileReleaseKotlin UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:javaPreCompileRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:compileReleaseJavaWithJavac UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-community-admob:bundleLibRuntimeToDirRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:javaPreCompileRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:compileReleaseJavaWithJavac UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-browser:bundleLibRuntimeToDirRelease UP-TO-DATE[0m
+[16:24:44]: ▸ [35m> Task :capacitor-share:javaPreCompileRelease[0m
+[16:24:44]: ▸ [35m> Task :capacitor-android:bundleLibRuntimeToDirRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:compileReleaseJavaWithJavac[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:javaPreCompileRelease[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:bundleLibRuntimeToDirRelease[0m
+[16:24:45]: ▸ [35m> Task :app:checkReleaseDuplicateClasses UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:compileReleaseJavaWithJavac NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:bundleLibRuntimeToDirRelease[0m
+[16:24:45]: ▸ [35m> Task :app:javaPreCompileRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:bundleLibCompileToJarRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:bundleLibCompileToJarRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:bundleLibCompileToJarRelease[0m
+[16:24:45]: ▸ [35m> Task :app:desugarReleaseFileDependencies UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseStartupProfile UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:bundleLibCompileToJarRelease[0m
+[16:24:45]: ▸ [35m> Task :app:processReleaseManifestForPackage[0m
+[16:24:45]: ▸ [35m> Task :app:mergeExtDexRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseShaders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :app:compileReleaseShaders NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :app:generateReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:mergeReleaseShaders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:compileReleaseShaders NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:generateReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:mergeReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:mergeReleaseShaders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:compileReleaseShaders NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:generateReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:mergeReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseShaders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:compileReleaseShaders NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:generateReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseShaders[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:compileReleaseShaders NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:generateReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseAssets[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:mergeReleaseShaders[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:compileReleaseShaders NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:generateReleaseAssets UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:mergeReleaseAssets[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseAssets[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:bundleLibRuntimeToJarRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:bundleLibRuntimeToJarRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:bundleLibRuntimeToJarRelease UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:bundleLibRuntimeToJarRelease[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:bundleLibRuntimeToJarRelease[0m
+[16:24:45]: ▸ [35m> Task :app:processReleaseJavaRes NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:processReleaseJavaRes NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:processReleaseJavaRes NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:processReleaseJavaRes UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:processReleaseJavaRes NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:processReleaseJavaRes NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseJavaResource UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseJniLibFolders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:mergeReleaseJniLibFolders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:mergeReleaseNativeLibs NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:copyReleaseJniLibsProjectOnly UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:mergeReleaseJniLibFolders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:mergeReleaseNativeLibs NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:copyReleaseJniLibsProjectOnly UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseJniLibFolders UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseNativeLibs NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:copyReleaseJniLibsProjectOnly UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseJniLibFolders[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseNativeLibs NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:copyReleaseJniLibsProjectOnly[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:mergeReleaseJniLibFolders[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:mergeReleaseNativeLibs NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :app:writeReleaseAppMetadata UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-android:prepareReleaseArtProfile UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-browser:prepareReleaseArtProfile UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:copyReleaseJniLibsProjectOnly[0m
+[16:24:45]: ▸ [35m> Task :capacitor-community-admob:prepareReleaseArtProfile UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseNativeLibs NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :app:stripReleaseDebugSymbols NO-SOURCE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-cordova-android-plugins:prepareReleaseArtProfile UP-TO-DATE[0m
+[16:24:45]: ▸ [35m> Task :capacitor-share:prepareReleaseArtProfile[0m
+[16:24:45]: ▸ [35m> Task :app:mergeReleaseArtProfile UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :app:collectReleaseDependencies[0m
+[16:24:46]: ▸ [35m> Task :app:configureReleaseDependencies UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :app:extractReleaseNativeSymbolTables NO-SOURCE[0m
+[16:24:46]: ▸ [35m> Task :app:extractProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:createFullJarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:extractProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:generateReleaseLintModel UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:prepareLintJarForPublish UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:createFullJarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:extractProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:generateReleaseLintModel UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:prepareLintJarForPublish UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:createFullJarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:extractProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:generateReleaseLintModel UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:prepareLintJarForPublish UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:createFullJarRelease[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:extractProguardFiles[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:generateReleaseLintModel[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:prepareLintJarForPublish UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:createFullJarRelease[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:extractProguardFiles[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:generateReleaseLintModel[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:prepareLintJarForPublish[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:checkReleaseAarMetadata UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:stripReleaseDebugSymbols NO-SOURCE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:extractDeepLinksForAarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:extractReleaseAnnotations UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseGeneratedProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseConsumerProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:mergeReleaseJavaResource UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:syncReleaseLibJars UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:bundleReleaseLocalLintAar UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:checkReleaseAarMetadata UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:stripReleaseDebugSymbols NO-SOURCE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:extractDeepLinksForAarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:extractReleaseAnnotations UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:mergeReleaseGeneratedProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:mergeReleaseConsumerProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:mergeReleaseJavaResource UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:syncReleaseLibJars UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:bundleReleaseLocalLintAar UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:stripReleaseDebugSymbols NO-SOURCE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:checkReleaseAarMetadata[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:copyReleaseJniLibsProjectAndLocalJars[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:extractDeepLinksForAarRelease[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:extractReleaseAnnotations[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:mergeReleaseGeneratedProguardFiles[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:mergeReleaseConsumerProguardFiles[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:checkReleaseAarMetadata UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:stripReleaseDebugSymbols NO-SOURCE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:extractDeepLinksForAarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:mergeReleaseJavaResource[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:extractReleaseAnnotations UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:syncReleaseLibJars[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:bundleReleaseLocalLintAar[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:mergeReleaseGeneratedProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:mergeReleaseConsumerProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:mergeReleaseJavaResource UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:syncReleaseLibJars UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:bundleReleaseLocalLintAar UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:stripReleaseDebugSymbols NO-SOURCE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:copyReleaseJniLibsProjectAndLocalJars[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:extractDeepLinksForAarRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:checkReleaseAarMetadata[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:extractReleaseAnnotations[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseGeneratedProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseConsumerProguardFiles UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:mergeReleaseJavaResource[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:lintVitalAnalyzeRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:syncReleaseLibJars[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:bundleReleaseLocalLintAar[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:writeReleaseLintModelMetadata UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:lintVitalAnalyzeRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:writeReleaseLintModelMetadata UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:lintVitalAnalyzeRelease UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:writeReleaseLintModelMetadata UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:writeReleaseLintModelMetadata[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:writeReleaseLintModelMetadata[0m
+[16:24:46]: ▸ [35m> Task :capacitor-android:generateReleaseLintVitalModel UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-browser:generateReleaseLintVitalModel UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-community-admob:generateReleaseLintVitalModel UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :capacitor-cordova-android-plugins:generateReleaseLintVitalModel[0m
+[16:24:46]: ▸ [35m> Task :capacitor-share:generateReleaseLintVitalModel[0m
+[16:24:46]: ▸ [35m> Task :app:parseReleaseIntegrityConfig UP-TO-DATE[0m
+[16:24:46]: ▸ [35m> Task :app:validateSigningRelease UP-TO-DATE[0m
+[16:24:47]: ▸ [35m> Task :app:processReleaseResources[0m
+[16:24:47]: ▸ [35m> Task :app:compileReleaseJavaWithJavac UP-TO-DATE[0m
+[16:24:48]: ▸ [35m> Task :app:dexBuilderRelease[0m
+[16:24:48]: ▸ [35m> Task :app:mergeReleaseGlobalSynthetics UP-TO-DATE[0m
+[16:24:48]: ▸ [35m> Task :app:generateReleaseLintVitalReportModel[0m
+[16:24:49]: ▸ [35m> Task :app:bundleReleaseResources[0m
+[16:24:49]: ▸ [35m> Task :capacitor-cordova-android-plugins:lintVitalAnalyzeRelease[0m
+[16:24:50]: ▸ [35m> Task :capacitor-share:lintVitalAnalyzeRelease[0m
+[16:24:51]: ▸ [35m> Task :app:lintVitalAnalyzeRelease[0m
+[16:24:51]: ▸ [35m> Task :app:lintVitalReportRelease[0m
+[16:24:51]: ▸ [35m> Task :app:lintVitalRelease[0m
+[16:24:52]: ▸ [35m> Task :app:mergeDexRelease[0m
+[16:24:52]: ▸ [35m> Task :app:buildReleasePreBundle[0m
+[16:24:53]: ▸ [35m> Task :app:compileReleaseArtProfile[0m
+[16:24:53]: ▸ [35m> Task :app:packageReleaseBundle[0m
+[16:24:55]: ▸ [35m> Task :app:signReleaseBundle[0m
+[16:24:55]: ▸ [35m> Task :app:produceReleaseBundleIdeListingFile[0m
+[16:24:55]: ▸ [35m> Task :app:createReleaseBundleListingFileRedirect UP-TO-DATE[0m
+[16:24:55]: ▸ [35m> Task :app:bundleRelease[0m
+[16:24:55]: ▸ [35m[Incubating] Problems report is available at: file:///Users/kingdemic/Desktop/PettyMayo_Android/android/build/reports/problems/problems-report.html[0m
+[16:24:55]: ▸ [35mDeprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.[0m
+[16:24:55]: ▸ [35mYou can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.[0m
+[16:24:55]: ▸ [35mFor more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.[0m
+[16:24:55]: ▸ [35mBUILD SUCCESSFUL in 14s[0m
+[16:24:55]: ▸ [35m229 actionable tasks: 87 executed, 142 up-to-date[0m
+[16:24:55]: [32m----------------------------------[0m
+[16:24:55]: [32m--- Step: upload_to_play_store ---[0m
+[16:24:55]: [32m----------------------------------[0m
+
++---------------------------------------------------------------------------+
+|                        [32mSummary for supply 2.230.0[0m                         |
++------------------------------------+--------------------------------------+
+| track                              | internal                             |
+| json_key                           | fastlane/api-key.json                |
+| package_name                       | com.kingdemic.pettymayo              |
+| release_status                     | draft                                |
+| skip_upload_metadata               | true                                 |
+| skip_upload_images                 | true                                 |
+| skip_upload_screenshots            | true                                 |
+| validate_only                      | false                                |
+| aab                                | /Users/kingdemic/Desktop/PettyMayo_  |
+|                                    | Android/android/app/build/outputs/b  |
+|                                    | undle/release/app-release.aab        |
+| skip_upload_apk                    | false                                |
+| skip_upload_aab                    | false                                |
+| skip_upload_changelogs             | false                                |
+| sync_image_upload                  | false                                |
+| track_promote_release_status       | completed                            |
+| check_superseded_tracks            | false                                |
+| timeout                            | 300                                  |
+| deactivate_on_promote              | true                                 |
+| changes_not_sent_for_review        | false                                |
+| rescue_changes_not_sent_for_review | true                                 |
+| ack_bundle_installation_warning    | false                                |
++------------------------------------+--------------------------------------+
+
+[16:24:56]: Preparing aab at path '/Users/kingdemic/Desktop/PettyMayo_Android/android/app/build/outputs/bundle/release/app-release.aab' for upload...
+[16:25:30]: Updating track 'internal'...
+[16:25:30]: Uploading all changes to Google Play...
+[16:25:32]: [32mSuccessfully finished the upload to Google Play[0m
+
++-------------------------------------------+
+|             [32mfastlane summary[0m              |
++------+----------------------+-------------+
+| Step | Action               | Time (in s) |
++------+----------------------+-------------+
+| 1    | default_platform     | 0           |
+| 2    | bundleRelease        | 14          |
+| 3    | upload_to_play_store | 36          |
++------+----------------------+-------------+
+
+[16:25:32]: [32mfastlane.tools finished successfully 🎉[0m
+
+#######################################################################
+# fastlane 2.231.0 is available. You are on 2.230.0.
+# You should use the latest version.
+# Please update using `fastlane update_fastlane`.
+#######################################################################
+
+[32m2.231.0 Improvements[0m
+> [!IMPORTANT]  
+> _fastlane_ will begin warning if you are using a Ruby version we will no longer support in future.
+
+---
+
+* [core] chore: rename key (ruby_min) key to remove "VERSION" from it (#29864) via Connor Tumbleson (@iBotPeaches)
+* [scan] Handle Xcode26 test failure (#29854) via Yusuf Özgül (@yusufozgul)
+* [spaceship] add support for key creation scope in portal client (#29458) via Daniel Costa (@danicunhac)
+* [ci] chore: remove slack train plugin (#29830) via Connor Tumbleson (@iBotPeaches)
+* [action] Fix target selection in `get_version_number` (#22178) via Sven Münnich (@svenmuennich)
+* [core] feat: add warning to output on unsupported Ruby version (#29840) via Connor Tumbleson (@iBotPeaches)
+* [snapshot] Fix status bar time format to use HH:MM instead of ISO8601 (#29846) via Philip Niedertscheider (@philprime)
+* [core] build: move to xcodeproj 1.27.0 (from 1.22.0) (#29836) via Connor Tumbleson (@iBotPeaches)
+* [action] increment_build_number supports xros (#29827) via Connor Tumbleson (@iBotPeaches)
+* [spaceship] feat: support webhook integration API (#29844) via Tim Shedor (@tshedor)
+* [spaceship] Add support for legacy 2sk_fo (SRP) logins (#27461) via Matt Kiazyk (@MattKiazyk)
+* docs: remove IMAGE_GUIDELINES as Google remnant (#29835) via Connor Tumbleson (@iBotPeaches)
+* [spaceship] add robust handling around sirp api calls (#29821) via Connor Tumbleson (@iBotPeaches)
+* [spaceship, match] fix: developer_id_application_g2 certificate filter (#29784) via Vitalii Budnik (@nekrich)
+* [core] build: support bundler v4 (#29813) via Connor Tumbleson (@iBotPeaches)
+* [snapshot] Fix device configuration being overwritten for iOS+Mac projects (#29834) via Abhishek Mahanti (@amahanti)
+* [ci] build: automate messages on released prs (#29819) via Connor Tumbleson (@iBotPeaches)
+* [produce] Add declared age range option to commands generator (#29815) via Stefan Herold (@stherold)
+* [ci] build: reduce confusion in compilation by renaming things (#29826) via Connor Tumbleson (@iBotPeaches)
+* [action] Add `xros` to upload_to_app_store.rb (#29460) via Luca Ban (@mesqueeb)
+* [ci] restore SLACK_URL to Automation pipeline (#29825) via Connor Tumbleson (@iBotPeaches)
+* [ci] remove unused release lanes. (#29785) via Connor Tumbleson (@iBotPeaches)
+* [GitHub Actions] Enable pull-requests.yml workflow (#29823) via Connor Tumbleson (@iBotPeaches)
+
+[32mPlease update using `fastlane update_fastlane`[0m

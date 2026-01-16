@@ -109,34 +109,59 @@ Stay petty, because we are digging for more. We have notifications on, alerts se
             <div className="flex-1 p-6 flex flex-col max-w-md mx-auto w-full">
 
                 {step === 'upload' && (
-                    <div className="flex-1 flex flex-col gap-6">
-                        {/* Image Input */}
-                        <div
-                            onClick={() => fileInputRef.current?.click()}
-                            className={`bg-yellow-100 text-black rounded-lg p-4 flex items-center justify-between cursor-pointer hover:opacity-90 transition-opacity ${image ? 'border-2 border-yellow-500' : ''}`}
-                        >
-                            <div className="flex items-center gap-3">
-                                <Upload size={20} />
-                                <span className="font-semibold">{image ? 'Image Selected' : 'Input Image'}</span>
-                            </div>
-                            <Play size={20} className="fill-black" />
-                            <input type="file" ref={fileInputRef} onChange={handleImageUpload} className="hidden" accept="image/*" />
+                    <div className="flex-1 flex flex-col gap-6 animate-in fade-in zoom-in duration-300">
+                        <div className="space-y-1">
+                            <h2 className="text-2xl font-bold text-white">New Story</h2>
+                            <p className="text-white/50 text-sm">Upload content to generate a viral article.</p>
                         </div>
 
-                        {/* Preview Selected */}
-                        {image && (
-                            <div className="aspect-video bg-white/5 rounded-lg overflow-hidden border border-white/10">
-                                <img src={image} className="w-full h-full object-cover" />
+                        {/* Combined Input Card */}
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-4">
+                            {/* Image Input */}
+                            <div
+                                onClick={() => fileInputRef.current?.click()}
+                                className={`group relative aspect-video bg-black/40 rounded-xl overflow-hidden cursor-pointer border-2 border-dashed transition-all hover:bg-black/60 ${image ? 'border-yellow-500/50' : 'border-white/10 hover:border-white/30'}`}
+                            >
+                                {image ? (
+                                    <>
+                                        <img src={image} className="w-full h-full object-cover" />
+                                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-white bg-black/50 px-3 py-1 rounded-full backdrop-blur-md">Change Image</span>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-white/30 group-hover:text-white/60 transition-colors">
+                                        <div className="p-3 bg-white/5 rounded-full group-hover:scale-110 transition-transform">
+                                            <Upload size={24} />
+                                        </div>
+                                        <span className="text-xs font-medium uppercase tracking-wider">Tap to Upload Image</span>
+                                    </div>
+                                )}
+                                <input type="file" ref={fileInputRef} onChange={handleImageUpload} className="hidden" accept="image/*" />
                             </div>
-                        )}
+
+                            {/* Tweet Input */}
+                            <div className="relative">
+                                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">
+                                    <span className="text-xs font-bold">X</span>
+                                </div>
+                                <input
+                                    value={tweetInput}
+                                    onChange={(e) => setTweetInput(e.target.value)}
+                                    className="w-full bg-black/40 text-sm pl-8 p-3 rounded-lg border border-white/5 focus:border-blue-500/50 focus:outline-none focus:ring-1 focus:ring-blue-500/20 font-mono text-blue-300 placeholder:text-white/10 transition-all"
+                                    placeholder="Paste Tweet URL (Optional)"
+                                />
+                            </div>
+                        </div>
 
                         {/* Start Button */}
                         <button
                             disabled={!image}
                             onClick={startProcessing}
-                            className="mt-auto w-full bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-blue-900/20 active:scale-95 transition-transform"
+                            className="mt-auto w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 disabled:opacity-30 disabled:cursor-not-allowed text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-yellow-900/20 active:scale-95 transition-all flex items-center justify-center gap-2"
                         >
-                            Start Magic Generator
+                            <Sparkles size={20} className={!image ? "opacity-50" : "animate-pulse"} />
+                            {image ? 'Generate Magic Story' : 'Select Image First'}
                         </button>
                     </div>
                 )}
@@ -184,16 +209,7 @@ Stay petty, because we are digging for more. We have notifications on, alerts se
                                 placeholder="Title"
                             />
 
-                            {/* Tweet Input */}
-                            <div className="flex flex-col gap-2">
-                                <label className="text-xs text-white/50 uppercase tracking-wider">Embed Tweet (Optional)</label>
-                                <input
-                                    value={tweetInput}
-                                    onChange={(e) => setTweetInput(e.target.value)}
-                                    className="bg-black/20 text-blue-400 text-sm p-3 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50"
-                                    placeholder="Paste Tweet Link or ID"
-                                />
-                            </div>
+
 
                             <textarea
                                 value={generatedContent}
