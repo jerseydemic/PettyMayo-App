@@ -42,69 +42,88 @@ export default function Create() {
 
         // Mock Generation (Long Form - 550+ Words)
         setGeneratedTitle("TEA SPILLED: The Receipts Are In ☕️");
-        setGeneratedContent(`Matches are burnt, bridges are crisp, and honey... the tea is SCALDING today. 🔥
+        setLoading(true);
+        setLogs([]);
+        setProgress(0);
 
-We just got the exclusive scoop on this situation and let me tell you, it is MESSY. Sources close to the drama are saying that this was not accidental. It wasn't just a slip-up; it was a calculated move that has left everyone in their inner circle absolutely reeling.
-
-"I have never seen anything like it," one insider whispered to us exclusively. "It's giving chaos. It's giving destruction. It's giving exactly what we expected from them, but multiplied by ten."
-
-But let's back up a second. To understand the gravity of this situation, you have to look at the history. This isn't the first time we've seen this kind of behavior, but it is certainly the most public. For years, fans have speculated about the tension bubbling beneath the surface. We've seen the cryptic tweets, the unfollows, the side-eyes at red carpet events. But this? This is the main event.
-
-The internet, naturally, is having a field day. Twitter (or X, whatever we're calling it this week) is absolutely lit up with theories. Some are saying it's a PR stunt designed to distract from other news. Others are convinced it's genuine, raw emotion spilling over after years of keeping it together.
-
-"It's absolutely wild," one commentator noted. "You think you know a person, and then they go and do this. It changes everything."
-
-And what about the fallout? Brands are supposedly already scrambling. Sponsorships might be on the line. When you build a brand on a specific image, shattering that image comes with a heavy price tag. We reached out to their reps for comment, and the silence? It's deafening. Usually, we'd get a "no comment" or a generic denial. Today? Crickets. That tells you everything you need to know.
-
-Let's dive deeper into the specifics. The image you see above? That's the smoking gun. Analyzing the background, the timing, the people present—it all paints a picture of a night gone wrong. Or right, depending on whose side you're on.
-
-We spoke to a body language expert who analyzed the footage leading up to this moment. "There's high anxiety," they confirmed. "Micro-expressions of contempt and fear. This wasn't a happy gathering."
-
-So where do we go from here? The court of public opinion is already in session, and the verdict is looking guilty. But as with all great celebrity scandals, the comeback is often just as meticulously planning as the downfall. Will they issue an apology video? Will they go silent and let it blow over? Or will they double down and go full villain era?
-
-Personally, I'm rooting for the villain era. It makes for better headlines. 💅
-
-Stay petty, because we are digging for more. We have notifications on, alerts set, and our DMs are open. If you know something, say something. But for now, sip slowly. This tea is hot enough to burn.`);
-
-        setProcessStage(4); // Done
-        setTimeout(() => setStep('preview'), 500);
-    };
-
-    const savePost = () => {
-        // Extract Tweet ID if a URL is pasted
-        let finalTweetId = undefined;
-        if (tweetInput.trim()) {
-            // Simple extraction logic: looks for the last numeric segment or takes the whole string
-            const match = tweetInput.match(/status\/(\d+)/);
-            finalTweetId = match ? match[1] : tweetInput.trim();
+        // Extract Tweet ID if present
+        if (tweetInput) {
+            const id = tweetInput.split('/').pop()?.split('?')[0];
+            if (id) setTweetId(id);
         }
 
+        // Simulating the "Magic" Pipeline
+        const steps = [
+            "Analyzing image features...",
+            "Identifying celebrity context...",
+            "Cross-referencing gossip databases...",
+            "Generating verified tea...",
+            "Formatting for viral spread..."
+        ];
+
+        let currentStep = 0;
+        const interval = setInterval(() => {
+            if (currentStep < steps.length) {
+                setLogs(prev => [...prev, steps[currentStep]]);
+                setProgress(p => p + 20);
+                currentStep++;
+            } else {
+                clearInterval(interval);
+                setTimeout(() => {
+                    generateMockContent();
+                    setLoading(false);
+                    setStep('edit');
+                }, 1000);
+            }
+        }, 1500);
+    };
+
+    const generateMockContent = () => {
+        const teaSpilled = `
+Look, we don't want to say "we told you so," but... actually, yes we calculate do. The internet is absolutely losing its mind right now, and for once, the hysteria is completely justified. 
+<br><br>
+Sources close to the situation tell us that the tension has been brewing for weeks. "It wasn't just a random outburst," an insider whispered to Petty Mayo exclusively. "This has been a calculated move since the start of the season."
+<br><br>
+What makes this even messier is the timing. Just days after the public statement that everything was "fine," we get THIS? The math isn't mathing, and the receipts are starting to pile up. Experts in celebrity PR are calling this a "total strategic meltdown," while fans are just grabbing popcorn.
+<br><br>
+We've reached out to reps for comment, but predictably, it's radio silence. Usually, silence speaks volumes, but in this case, it's practically screaming. Expect a notes-app apology within 24 hours, or a cryptic Instagram story with a black background and white text.
+<br><br>
+Stay tuned, because this tea is still piping hot and we're just getting started. ☕️💅
+        `;
+        setGeneratedContent(teaSpilled.trim());
+    };
+
+    const handleSave = () => {
         const newPost: Post = {
-            id: Date.now().toString(),
-            title: generatedTitle,
-            thumbnail: image || '',
-            articleUrl: 'https://instagram.com/realpettymay0',
+            id: Date.now(),
+            thumbnail: image || '/placeholder.jpg',
+            title: title || 'New Tea Spilled',
+            source: 'Petty Mayo Exclusive',
+            time: 'Just Now',
+            articleUrl: '#',
             content: generatedContent,
-            tweetId: finalTweetId
+            tweetId: tweetId || undefined
         };
 
-        // Save to LocalStorage
-        const existing = localStorage.getItem('custom_posts');
+        const existing = localStorage.getItem('local_posts');
         const posts = existing ? JSON.parse(existing) : [];
-        localStorage.setItem('custom_posts', JSON.stringify([newPost, ...posts]));
+        localStorage.setItem('local_posts', JSON.stringify([newPost, ...posts]));
 
-        navigate('/');
+        // Force reload posts
+        window.location.href = '/';
     };
 
     return (
-        <div className="min-h-screen bg-black text-white flex flex-col">
+        <div className={`min-h-screen bg-black text-white flex flex-col font-sans ${embedded ? '' : ''}`}>
             {/* Header */}
-            <div className="sticky top-0 z-20 bg-black/60 backdrop-blur-xl px-4 py-4 flex items-center border-b border-white/10">
-                <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-white/90 hover:bg-white/10 rounded-full">
-                    <ArrowLeft size={24} />
-                </button>
-                <span className="ml-4 font-bold uppercase tracking-widest">Content Dashboard</span>
-            </div>
+            {!embedded && (
+                <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-xl px-4 py-4 flex items-center border-b border-white/10">
+                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-white/90 hover:bg-white/10 rounded-full">
+                        <ArrowLeft size={24} />
+                    </button>
+                    <span className="ml-4 font-bold uppercase tracking-widest text-lg">Magic Generator</span>
+                </div>
+            )}
 
             <div className="flex-1 p-6 flex flex-col max-w-md mx-auto w-full">
 

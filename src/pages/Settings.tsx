@@ -21,7 +21,11 @@ const DEFAULT_SETTINGS: AppSettings = {
     showBottomAd: true,
 };
 
-export default function Settings() {
+interface SettingsProps {
+    embedded?: boolean;
+}
+
+export default function Settings({ embedded = false }: SettingsProps) {
     const navigate = useNavigate();
     const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
     const [saved, setSaved] = useState(false);
@@ -45,14 +49,16 @@ export default function Settings() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white flex flex-col font-sans">
+        <div className={`min-h-screen bg-black text-white flex flex-col font-sans ${embedded ? 'min-h-0' : ''}`}>
             {/* Header */}
-            <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-xl px-4 py-4 flex items-center border-b border-white/10">
-                <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-white/90 hover:bg-white/10 rounded-full">
-                    <ArrowLeft size={24} />
-                </button>
-                <span className="ml-4 font-bold uppercase tracking-widest text-lg">App Settings</span>
-            </div>
+            {!embedded && (
+                <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-xl px-4 py-4 flex items-center border-b border-white/10">
+                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-white/90 hover:bg-white/10 rounded-full">
+                        <ArrowLeft size={24} />
+                    </button>
+                    <span className="ml-4 font-bold uppercase tracking-widest text-lg">App Settings</span>
+                </div>
+            )}
 
             <div className="flex-1 p-6 max-w-lg mx-auto w-full flex flex-col gap-8">
 

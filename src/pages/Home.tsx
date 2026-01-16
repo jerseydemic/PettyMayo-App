@@ -33,9 +33,7 @@ export default function Home() {
             <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 flex justify-between items-center">
                 <div className="w-6" /> {/* Spacer */}
                 <h1 className="text-xl font-bold tracking-tight uppercase text-white/90 drop-shadow-sm">Petty Mayo</h1>
-                <button onClick={() => navigate('/settings')} className="text-white/50 hover:text-white transition-colors">
-                    <Settings size={20} />
-                </button>
+
             </header>
 
             {/* Content */}
