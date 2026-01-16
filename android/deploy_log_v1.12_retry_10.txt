@@ -1,0 +1,162 @@
+Top level ::CompositeIO is deprecated, require 'multipart/post' and use `Multipart::Post::CompositeReadIO` instead!
+Top level ::Parts is deprecated, require 'multipart/post' and use `Multipart::Post::Parts` instead!
+[16:37:41]: [33mGet started using a Gemfile for fastlane https://docs.fastlane.tools/getting-started/ios/setup/#use-a-gemfile[0m
+[16:37:42]: [32m------------------------------[0m
+[16:37:42]: [32m--- Step: default_platform ---[0m
+[16:37:42]: [32m------------------------------[0m
+[16:37:42]: [32mDriving the lane 'android deploy' 🚀[0m
+[16:37:42]: [32m---------------------------[0m
+[16:37:42]: [32m--- Step: bundleRelease ---[0m
+[16:37:42]: [32m---------------------------[0m
+[16:37:42]: [36m$ /Users/kingdemic/Desktop/PettyMayo_Android/android/gradlew bundleRelease -p . -Pandroid.injected.signing.store.file=/Users/kingdemic/Desktop/PettyMayo_Android/android/app/release.keystore -Pandroid.injected.signing.store.password=TrainerApp123\! -Pandroid.injected.signing.key.alias=strategy-trainer -Pandroid.injected.signing.key.password=TrainerApp123\![0m
+[16:37:44]: ▸ [35mFAILURE: Build failed with an exception.[0m
+[16:37:44]: ▸ [35m* Where:[0m
+[16:37:44]: ▸ [35mSettings file '/Users/kingdemic/Desktop/PettyMayo_Android/android/settings.gradle' line: 5[0m
+[16:37:44]: ▸ [35m* What went wrong:[0m
+[16:37:44]: ▸ [35mA problem occurred evaluating settings 'android'.[0m
+[16:37:44]: ▸ [35m> BUG! exception in phase 'semantic analysis' in source unit '_BuildScript_' Unsupported class file major version 69[0m
+[16:37:44]: ▸ [35m* Try:[0m
+[16:37:44]: ▸ [35m> Run with --stacktrace option to get the stack trace.[0m
+[16:37:44]: ▸ [35m> Run with --info or --debug option to get more log output.[0m
+[16:37:44]: ▸ [35m> Run with --scan to get full insights.[0m
+[16:37:44]: ▸ [35m> Get more help at https://help.gradle.org.[0m
+[16:37:44]: ▸ [35mBUILD FAILED in 1s[0m
++-----------------------------------+
+|           [33mLane Context[0m            |
++------------------+----------------+
+| DEFAULT_PLATFORM | android        |
+| PLATFORM_NAME    | android        |
+| LANE_NAME        | android deploy |
++------------------+----------------+
+[16:37:44]: [31mCalled from Fastfile at line 6[0m
+[16:37:44]: [31m```[0m
+[16:37:44]: [31m    4:	  desc "Deploy to Internal Testing"[0m
+[16:37:44]: [31m    5:	  lane :deploy do[0m
+[16:37:44]: [31m => 6:	    gradle([0m
+[16:37:44]: [31m    7:	      task: "bundleRelease",[0m
+[16:37:44]: [31m    8:	      properties: {[0m
+[16:37:44]: [31m```[0m
+[16:37:44]: [31mExit status of command '/Users/kingdemic/Desktop/PettyMayo_Android/android/gradlew bundleRelease -p . -Pandroid.injected.signing.store.file=/Users/kingdemic/Desktop/PettyMayo_Android/android/app/release.keystore -Pandroid.injected.signing.store.password=TrainerApp123\! -Pandroid.injected.signing.key.alias=strategy-trainer -Pandroid.injected.signing.key.password=TrainerApp123\!' was 1 instead of 0.
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Settings file '/Users/kingdemic/Desktop/PettyMayo_Android/android/settings.gradle' line: 5
+
+* What went wrong:
+A problem occurred evaluating settings 'android'.
+> BUG! exception in phase 'semantic analysis' in source unit '_BuildScript_' Unsupported class file major version 69
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1s
+[0m
+
++---------------------------------------+
+|           [32mfastlane summary[0m            |
++------+------------------+-------------+
+| Step | Action           | Time (in s) |
++------+------------------+-------------+
+| 1    | default_platform | 0           |
+| 💥   | [31mbundleRelease[0m    | 1           |
++------+------------------+-------------+
+
+[16:37:44]: [31mfastlane finished with errors[0m
+
+Looking for related GitHub issues on fastlane/fastlane...
+
+
+#######################################################################
+# fastlane 2.231.0 is available. You are on 2.230.0.
+# You should use the latest version.
+# Please update using `fastlane update_fastlane`.
+#######################################################################
+# Run `gem cleanup` from time to time to speed up fastlane
+#######################################################################
+
+[32m2.231.0 Improvements[0m
+> [!IMPORTANT]  
+> _fastlane_ will begin warning if you are using a Ruby version we will no longer support in future.
+
+---
+
+* [core] chore: rename key (ruby_min) key to remove "VERSION" from it (#29864) via Connor Tumbleson (@iBotPeaches)
+* [scan] Handle Xcode26 test failure (#29854) via Yusuf Özgül (@yusufozgul)
+* [spaceship] add support for key creation scope in portal client (#29458) via Daniel Costa (@danicunhac)
+* [ci] chore: remove slack train plugin (#29830) via Connor Tumbleson (@iBotPeaches)
+* [action] Fix target selection in `get_version_number` (#22178) via Sven Münnich (@svenmuennich)
+* [core] feat: add warning to output on unsupported Ruby version (#29840) via Connor Tumbleson (@iBotPeaches)
+* [snapshot] Fix status bar time format to use HH:MM instead of ISO8601 (#29846) via Philip Niedertscheider (@philprime)
+* [core] build: move to xcodeproj 1.27.0 (from 1.22.0) (#29836) via Connor Tumbleson (@iBotPeaches)
+* [action] increment_build_number supports xros (#29827) via Connor Tumbleson (@iBotPeaches)
+* [spaceship] feat: support webhook integration API (#29844) via Tim Shedor (@tshedor)
+* [spaceship] Add support for legacy 2sk_fo (SRP) logins (#27461) via Matt Kiazyk (@MattKiazyk)
+* docs: remove IMAGE_GUIDELINES as Google remnant (#29835) via Connor Tumbleson (@iBotPeaches)
+* [spaceship] add robust handling around sirp api calls (#29821) via Connor Tumbleson (@iBotPeaches)
+* [spaceship, match] fix: developer_id_application_g2 certificate filter (#29784) via Vitalii Budnik (@nekrich)
+* [core] build: support bundler v4 (#29813) via Connor Tumbleson (@iBotPeaches)
+* [snapshot] Fix device configuration being overwritten for iOS+Mac projects (#29834) via Abhishek Mahanti (@amahanti)
+* [ci] build: automate messages on released prs (#29819) via Connor Tumbleson (@iBotPeaches)
+* [produce] Add declared age range option to commands generator (#29815) via Stefan Herold (@stherold)
+* [ci] build: reduce confusion in compilation by renaming things (#29826) via Connor Tumbleson (@iBotPeaches)
+* [action] Add `xros` to upload_to_app_store.rb (#29460) via Luca Ban (@mesqueeb)
+* [ci] restore SLACK_URL to Automation pipeline (#29825) via Connor Tumbleson (@iBotPeaches)
+* [ci] remove unused release lanes. (#29785) via Connor Tumbleson (@iBotPeaches)
+* [GitHub Actions] Enable pull-requests.yml workflow (#29823) via Connor Tumbleson (@iBotPeaches)
+
+[32mPlease update using `fastlane update_fastlane`[0m
+/usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane_core/lib/fastlane_core/ui/interface.rb:153:in 'FastlaneCore::Interface#shell_error!': [31m[!] Exit status of command '/Users/kingdemic/Desktop/PettyMayo_Android/android/gradlew bundleRelease -p . -Pandroid.injected.signing.store.file=/Users/kingdemic/Desktop/PettyMayo_Android/android/app/release.keystore -Pandroid.injected.signing.store.password=TrainerApp123\! -Pandroid.injected.signing.key.alias=strategy-trainer -Pandroid.injected.signing.key.password=TrainerApp123\!' was 1 instead of 0. (FastlaneCore::Interface::FastlaneShellError)
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Settings file '/Users/kingdemic/Desktop/PettyMayo_Android/android/settings.gradle' line: 5
+
+* What went wrong:
+A problem occurred evaluating settings 'android'.
+> BUG! exception in phase 'semantic analysis' in source unit '_BuildScript_' Unsupported class file major version 69
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1s
+[0m
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane_core/lib/fastlane_core/ui/ui.rb:17:in 'FastlaneCore::UI.method_missing'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/helper/sh_helper.rb:80:in 'Fastlane::Actions.sh_control_output'
+	from /usr/local/Cellar/ruby/4.0.1/lib/ruby/4.0.0/forwardable.rb:231:in 'Fastlane::Action.sh'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/helper/gradle_helper.rb:32:in 'FastlaneCore::Helper::GradleHelper#trigger'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/actions/gradle.rb:60:in 'Fastlane::Actions::GradleAction.run'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:263:in 'block (2 levels) in Fastlane::Runner#execute_action'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/actions/actions_helper.rb:69:in 'Fastlane::Actions.execute_action'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:255:in 'block in Fastlane::Runner#execute_action'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:229:in 'Dir.chdir'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:229:in 'Fastlane::Runner#execute_action'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:157:in 'Fastlane::Runner#trigger_action_by_name'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/fast_file.rb:159:in 'Fastlane::FastFile#method_missing'
+	from Fastfile:6:in 'block (2 levels) in Fastlane::FastFile#parsing_binding'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/lane.rb:41:in 'Fastlane::Lane#call'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:49:in 'block in Fastlane::Runner#execute'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:45:in 'Dir.chdir'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/runner.rb:45:in 'Fastlane::Runner#execute'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/lane_manager.rb:46:in 'Fastlane::LaneManager.cruise_lane'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/command_line_handler.rb:34:in 'Fastlane::CommandLineHandler.handle'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/commands_generator.rb:110:in 'block (2 levels) in Fastlane::CommandsGenerator#run'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/commander-4.6.0/lib/commander/command.rb:187:in 'Commander::Command#call'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/commander-4.6.0/lib/commander/command.rb:157:in 'Commander::Command#run'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/commander-4.6.0/lib/commander/runner.rb:444:in 'Commander::Runner#run_active_command'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in 'Commander::Runner#run!'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/commander-4.6.0/lib/commander/delegates.rb:18:in 'Commander::Delegates#run!'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/commands_generator.rb:363:in 'Fastlane::CommandsGenerator#run'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/commands_generator.rb:43:in 'Fastlane::CommandsGenerator.start'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in 'Fastlane::CLIToolsDistributor.take_off'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/gems/fastlane-2.230.0/bin/fastlane:23:in '<top (required)>'
+	from /usr/local/Cellar/ruby/4.0.1/lib/ruby/4.0.0/rubygems.rb:303:in 'Kernel#load'
+	from /usr/local/Cellar/ruby/4.0.1/lib/ruby/4.0.0/rubygems.rb:303:in 'Gem.activate_and_load_bin_path'
+	from /usr/local/Cellar/fastlane/2.230.0_1/libexec/bin/fastlane:25:in '<main>'
