@@ -86,7 +86,7 @@ export default function Settings({ embedded = false }: SettingsProps) {
                                 className="w-full bg-black/40 text-sm p-4 rounded-xl border border-white/5 focus:border-blue-500/50 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all font-mono text-gray-300 placeholder:text-white/10"
                                 placeholder="ca-app-pub-..."
                             />
-                            <p className="text-[10px] text-white/30 pl-1">Found in AdMob Console > App > Ad Units</p>
+                            <p className="text-[10px] text-white/30 pl-1">Found in AdMob Console &gt; App &gt; Ad Units</p>
                         </div>
 
                         <div className="space-y-2">
@@ -99,7 +99,7 @@ export default function Settings({ embedded = false }: SettingsProps) {
                                 className="w-full bg-black/40 text-sm p-4 rounded-xl border border-white/5 focus:border-blue-500/50 focus:outline-none focus:ring-1 focus:ring-blue-500/20 transition-all font-mono text-gray-300 placeholder:text-white/10"
                                 placeholder="ca-app-pub-..."
                             />
-                            <p className="text-[10px] text-white/30 pl-1">Found in AdMob Console > App > Ad Units</p>
+                            <p className="text-[10px] text-white/30 pl-1">Found in AdMob Console &gt; App &gt; Ad Units</p>
                         </div>
                     </div>
                 </section>
