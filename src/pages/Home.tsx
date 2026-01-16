@@ -80,7 +80,7 @@ export default function Home() {
             {/* Social Footer */}
             <footer className="mt-12 mb-8 px-6">
                 <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center gap-4 mx-auto max-w-sm">
-                    <div className="flex justify-center gap-8">
+                    <div className="flex justify-center gap-16">
                         <a href="https://instagram.com/realpettymay0" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors transform hover:scale-110">
                             <Instagram size={28} />
                         </a>
