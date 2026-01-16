@@ -11,18 +11,14 @@ export default function Create() {
     // State
     const [step, setStep] = useState<'upload' | 'processing' | 'preview' | 'edit'>('upload');
     const [image, setImage] = useState<string | null>(null);
-    const [processStage, setProcessStage] = useState<number>(0); // 0: Idle, 1: Extract, 2: Research, 3: Generate
+    const [processStage, setProcessStage] = useState<number>(0);
     const [generatedTitle, setGeneratedTitle] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
     const [tweetInput, setTweetInput] = useState('');
     const [tweetId, setTweetId] = useState<string | null>(null);
-    const [logs, setLogs] = useState<string[]>([]);
-    const [progress, setProgress] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState("We Can't Believe What Just Happened");
+    const [title] = useState("We Can't Believe What Just Happened");
 
     // Stub for embedded prop if needed later, but we removed it to simplify imports for now
-    // If needed we can re-add props interface.
     const embedded = window.location.pathname === '/admin';
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,9 +48,6 @@ export default function Create() {
 
         // Mock Generation (Long Form - 550+ Words)
         setGeneratedTitle("TEA SPILLED: The Receipts Are In ☕️");
-        setLoading(true);
-        setLogs([]);
-        setProgress(0);
 
         // Extract Tweet ID if present
         if (tweetInput) {
@@ -63,28 +56,9 @@ export default function Create() {
         }
 
         // Simulating the "Magic" Pipeline
-        const steps = [
-            "Analyzing image features...",
-            "Identifying celebrity context...",
-            "Cross-referencing gossip databases...",
-            "Generating verified tea...",
-            "Formatting for viral spread..."
-        ];
-
-        let currentStep = 0;
-        const interval = setInterval(() => {
-            if (currentStep < steps.length) {
-                setLogs(prev => [...prev, steps[currentStep]]);
-                setProgress(p => p + 20);
-                currentStep++;
-            } else {
-                clearInterval(interval);
-                setTimeout(() => {
-                    generateMockContent();
-                    setLoading(false);
-                    setStep('edit');
-                }, 1000);
-            }
+        setTimeout(() => {
+            generateMockContent();
+            setStep('edit');
         }, 1500);
     };
 
@@ -108,7 +82,6 @@ Stay tuned, because this tea is still piping hot and we're just getting started.
             id: Date.now().toString(),
             thumbnail: image || '/placeholder.jpg',
             title: title || 'New Tea Spilled',
-            source: 'Petty Mayo Exclusive',
             time: 'Just Now',
             articleUrl: '#',
             content: generatedContent,
