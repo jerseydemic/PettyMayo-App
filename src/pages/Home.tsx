@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Browser } from '@capacitor/browser';
 import { fetchPosts, type Post } from '../data/posts';
-import { Loader2, Instagram, Facebook, Settings } from 'lucide-react';
+import { Loader2, Instagram, Facebook } from 'lucide-react';
 
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);

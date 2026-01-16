@@ -8,12 +8,19 @@ export default function Create() {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // State
-    const [step, setStep] = useState<'upload' | 'processing' | 'preview'>('upload');
+    const [step, setStep] = useState<'upload' | 'processing' | 'preview' | 'edit'>('upload'); // Added 'edit' to step type
     const [image, setImage] = useState<string | null>(null);
     const [processStage, setProcessStage] = useState<number>(0); // 0: Idle, 1: Extract, 2: Research, 3: Generate
     const [generatedTitle, setGeneratedTitle] = useState('');
     const [generatedContent, setGeneratedContent] = useState('');
     const [tweetInput, setTweetInput] = useState('');
+    const [tweetId, setTweetId] = useState<string | null>(null); // Added tweetId state
+    const [title, setTitle] = useState("We Can't Believe What Just Happened"); // Added title state
+    const [loading, setLoading] = useState(false); // Added loading state
+    const [logs, setLogs] = useState<string[]>([]); // Added logs state
+    const [progress, setProgress] = useState(0); // Added progress state
+    const [embedded, setEmbedded] = useState(false); // Added embedded state (assuming it's needed for the template)
+
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -238,7 +245,7 @@ Stay tuned, because this tea is still piping hot and we're just getting started.
                         </div>
 
                         <button
-                            onClick={savePost}
+                            onClick={handleSave}
                             className="w-full bg-green-500 text-black py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-green-400 transition-colors"
                         >
                             Publish to App
