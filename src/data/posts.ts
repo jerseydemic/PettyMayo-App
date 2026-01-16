@@ -85,36 +85,54 @@ Sources close to Kristy say she is "relieved" and ready to move forward. "She wa
     },
     {
         id: '6',
-        title: 'Celebrity spotted in NYC',
-        thumbnail: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZWx8ZW58MHx8MHx8fDA%3D',
-        articleUrl: 'https://likeshop.me/usweekly',
-        content: `New York City sighting! 👀
+        title: 'Bethenny Frankel Battles Infection',
+        thumbnail: '/bethenny.png',
+        articleUrl: 'https://instagram.com/realpettymay0',
+        content: `Bethenny Frankel's St. Barths NYE trip took a scary turn. 🌴🚑
 
-A top A-lister was just spotted grabbing coffee in SoHo, trying to keep a low profile. Dressed in oversized shades and a trench coat, they almost fooled the paparazzi—but not quite.
+The former RHONY star shared graphic photos of a severe facial infection she contracted while on vacation. "My entire face broke out in a rash with pus-y bumps," she revealed on TikTok.
 
-Who do you think it is? Let us know in the comments! 👇`
+Frankel speculated the infection came from hotel linens, vowing to "never, ever" use them again. Medical experts, however, suggest it's likely bacterial folliculitis or contact dermatitis, shutting down wilder online rumors.
+
+Despite the health scare and the tragic loss of her friend Jasen Kaplan during the trip, Bethenny tried to salvage the holiday with her daughter. But this "dream vacation" definitely had a nightmare ending.`
     },
     {
         id: '7',
-        title: 'Royal Family Update',
-        thumbnail: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29ufGVufDB8fDB8fHww',
-        articleUrl: 'https://likeshop.me/usweekly',
-        content: `The Palace has released a new statement regarding the upcoming tour. 👑
+        title: 'Viral Stranger Things Theory',
+        thumbnail: '/stranger_things.jpg',
+        articleUrl: 'https://instagram.com/realpettymay0',
+        content: `A new 'Stranger Things' fan theory is breaking the internet. 🕰️🔦
 
-Amidst rumors of tension, the Royal Family is putting on a united front. The schedule includes stops in three major commonwealth nations.
+Eagle-eyed fans have spotted clues that suggest a SECRET episode might drop before the final season. The theory hinges on a series of cryptic timestamps found in the latest teaser trailer.
 
-Will this tour repair the public image, or is the damage already done?`
+"It builds a bridge between the time jump," one viral Reddit thread claims. Netflix has neither confirmed nor denied the rumors, which is only fueling the hype train.
+
+Could the Duffer Brothers be planning one last surprise? Or is this just mass hysteria from a fandom starving for content? Stay tuned.`
     },
     {
         id: '8',
-        title: 'Award Show Highlights',
-        thumbnail: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cG9ydHJhaXR8ZW58MHx8MHx8fDA%3D',
-        articleUrl: 'https://likeshop.me/usweekly'
+        title: 'Heartbreak: Advocate Passes Away',
+        thumbnail: '/midwife.jpg',
+        articleUrl: 'https://instagram.com/realpettymay0',
+        content: `Tragedy strikes the maternal health community. 💔
+
+Dr. Janell Green Smith, a beloved 31-year-old midwife and fierce advocate for Black maternal health, has passed away due to complications during her own labor.
+
+Known as the "Loc'd Midwife," Dr. Green Smith dedicated her life to fighting the very disparities that ultimately claimed it. Her passing is being mourned as a "profound failure of the system" by the American College of Nurse-Midwives.
+
+She is survived by her husband and newborn baby, Eden. A devastating loss for a community she fought so hard to protect.`
     },
     {
         id: '9',
-        title: 'New Album Release',
-        thumbnail: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D',
-        articleUrl: 'https://likeshop.me/usweekly'
+        title: 'ICE Agents Spark Outrage',
+        thumbnail: '/ice_agents.jpg',
+        articleUrl: 'https://instagram.com/realpettymay0',
+        content: `Outrage in Minnesota after ICE agents reportedly dined at a local Mexican restaurant... only to return hours later to raid it. 🌮🚓
+
+Witnesses in Willmar, MN claim four agents enjoyed lunch at "El Tapatio" in the afternoon. Later that evening, around closing time, they returned to arrest three workers.
+
+The incident has shaken the local community, with bystanders criticizing the move as particularly callous. "They ate the food and then arrested the hands that made it," one resident posted.
+
+This comes amidst a spike in ICE activity in the region, causing panic among immigrant-owned businesses.`
     }
 ];
