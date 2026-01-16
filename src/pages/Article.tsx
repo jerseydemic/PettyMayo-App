@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchPosts, type Post } from '../data/posts';
 import { AdMob, BannerAdSize, BannerAdPosition } from '@capacitor-community/admob';
 import { Capacitor } from '@capacitor/core';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 export default function Article() {
     const navigate = useNavigate();
@@ -21,8 +22,9 @@ export default function Article() {
             });
         }
 
-        // 2. Initialize Ads (Android Only)
-        if (Capacitor.getPlatform() === 'android') {
+        // 2. Initialize Ads (Android + iOS)
+        const platform = Capacitor.getPlatform();
+        if (platform === 'android' || platform === 'ios') {
             AdMob.initialize({}).then(() => {
                 AdMob.showBanner({
                     adId: 'ca-app-pub-3940256099942544/6300978111', // Test Ad ID
@@ -75,6 +77,19 @@ export default function Article() {
                         <h1 className="text-2xl font-bold leading-tight font-serif text-white">{post.title}</h1>
                     </div>
 
+                    {/* Embedded Tweet (Video) */}
+                    {post.tweetId && (
+                        <div className="mb-8 flex justify-center w-full">
+                            <div className="w-full max-w-[500px]">
+                                <TwitterTweetEmbed
+                                    tweetId={post.tweetId}
+                                    options={{ theme: 'dark', align: 'center', conversation: 'none' }}
+                                    placeholder={<div className="h-[250px] w-full bg-white/5 animate-pulse rounded-lg" />}
+                                />
+                            </div>
+                        </div>
+                    )}
+
                     {/* Body Text */}
                     <div className="prose prose-invert prose-lg max-w-none">
                         <p className="text-gray-300 leading-relaxed whitespace-pre-line text-lg font-light">
@@ -82,8 +97,8 @@ export default function Article() {
                         </p>
                     </div>
 
-                    {/* Web Ad Placeholder (Hidden on Android) */}
-                    {Capacitor.getPlatform() !== 'android' && (
+                    {/* Web Ad Placeholder (Hidden on Native) */}
+                    {Capacitor.getPlatform() === 'web' && (
                         <div className="mt-8 py-8 bg-white/5 border border-white/5 rounded-lg flex flex-col items-center justify-center text-center">
                             <span className="text-xs text-uppercase text-gray-500 mb-2">Advertisement</span>
                             <div className="w-[300px] h-[250px] bg-white/10 flex items-center justify-center">
