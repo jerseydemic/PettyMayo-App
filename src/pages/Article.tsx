@@ -60,13 +60,13 @@ export default function Article() {
 
             {/* Article Content */}
             <div className="flex-1 overflow-y-auto pb-20">
-                <div className="w-full aspect-square relative">
+                <div className="w-full relative">
                     <img
                         src={post.thumbnail}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto object-contain max-h-[70vh] mx-auto"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50" />
                 </div>
 
                 <div className="px-6 -mt-16 relative z-10">
