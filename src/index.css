@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical: Force form elements to respect Tailwind color classes */
+input,
+select,
+textarea {
+  color: inherit !important;
+}
+
+/* Ensure proper autocomplete styling for dark backgrounds */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: inherit !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Prevent text input color override on iOS */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="url"],
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Fix select dropdown on dark backgrounds */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  color: inherit !important;
+}
+
 html {
   height: 100%;
 }
