@@ -66,13 +66,12 @@ export default function PullToRefresh({ onRefresh, children, threshold = 80 }: P
         >
             {/* Loading Indicator Layer - effectively behind content conceptually but visible when pulled */}
             <div
-                className="absolute top-0 left-0 w-full flex justify-center pointer-events-none z-0"
                 style={{
-                    height: `${threshold}px`,
-                    transform: `translateY(${pullY > 0 ? pullY - 40 : -40}px)`,
-                    opacity: Math.min(pullY / threshold, 1),
-                    transition: isRefreshing ? 'transform 0.2s' : 'none' // Instant follow during drag
-                }}
+                    '--ptr-height': `${threshold}px`,
+                    '--ptr-translate': `${pullY > 0 ? pullY - 40 : -40}px`,
+                    '--ptr-opacity': Math.min(pullY / threshold, 1),
+                } as React.CSSProperties}
+                className={`absolute top-0 left-0 w-full flex justify-center pointer-events-none z-0 h-[var(--ptr-height)] translate-y-[var(--ptr-translate)] opacity-[var(--ptr-opacity)] ${isRefreshing ? 'transition-transform duration-200' : 'transition-none'}`}
             >
                 <div className="mt-4 p-2 bg-white/10 rounded-full backdrop-blur-md shadow-xl border border-white/5">
                     <Loader2
@@ -85,12 +84,11 @@ export default function PullToRefresh({ onRefresh, children, threshold = 80 }: P
             {/* Main Content */}
             <div
                 ref={contentRef}
-                className="flex-1 w-full bg-black z-10 transition-transform ease-out duration-200"
                 style={{
-                    transform: `translateY(${pullY}px)`,
-                    // Removing transition during drag for 1:1 feel, adding it back on release
-                    transition: startTouchY !== null && !isRefreshing ? 'none' : 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
-                }}
+                    '--ptr-translate-content': `${pullY}px`,
+                    '--ptr-transition-content': startTouchY !== null && !isRefreshing ? 'none' : 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                } as React.CSSProperties}
+                className="flex-1 w-full bg-black z-10 transition-[var(--ptr-transition-content)] translate-y-[var(--ptr-translate-content)]"
             >
                 {children}
             </div>

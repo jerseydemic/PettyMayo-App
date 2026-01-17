@@ -61,19 +61,13 @@ body {
 }
 
 /* Default mobile app container behavior */
-body:not(.admin-mode) {
+body {
   width: 100%;
   max-width: 480px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Admin mode releases constraints */
-body.admin-mode {
-  width: 100%;
-  max-width: none;
-  background-color: #09090b;
-  box-shadow: none;
-}
+
 
 #root {
   width: 100%;

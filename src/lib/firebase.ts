@@ -1,6 +1,6 @@
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+// import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from 'firebase/analytics';
 
 // Firebase configuration provided by user
@@ -18,7 +18,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Services
-export const db = getFirestore(app);
+// Initialize Services WITH EXPLICIT MEMORY CACHE
+// This prevents 'Failed to obtain exclusive access to persistence layer' errors
+// caused by multiple tabs or ghost locks.
+import { initializeFirestore, memoryLocalCache } from 'firebase/firestore';
+
+export const db = initializeFirestore(app, {
+    localCache: memoryLocalCache()
+});
 export const analytics = getAnalytics(app);
 
 // import { enableIndexedDbPersistence } from 'firebase/firestore';
