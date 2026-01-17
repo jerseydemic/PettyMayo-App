@@ -4,15 +4,24 @@ import { useState, useEffect } from 'react';
 import { Browser } from '@capacitor/browser';
 import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 import { Capacitor } from '@capacitor/core';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { STATIC_POSTS, type Post } from '../data/posts';
 import ShareOptions from '../components/ShareOptions';
 
 export default function Article() {
     const { state } = useLocation();
     const navigate = useNavigate();
-    const { id, slug } = useParams();
     const [post, setPost] = useState<Post | null>(null);
+
+    // Load Twitter Widget Script
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = "https://platform.twitter.com/widgets.js";
+        script.async = true;
+        document.body.appendChild(script);
+        return () => {
+            // Optional cleanup
+        }
+    }, [post?.tweetId]);
 
     // Dynamic Settings State
     const [settings, setSettings] = useState({
@@ -213,16 +222,9 @@ export default function Article() {
                     {post.tweetId && (
                         <div className="mb-8 w-full flex justify-center border-y border-white/10 py-4 bg-white/5">
                             <div className="w-full max-w-[550px] overflow-hidden rounded-xl">
-                                <TwitterTweetEmbed
-                                    tweetId={post.tweetId}
-                                    options={{ theme: 'dark', align: 'center', conversation: 'none' }}
-                                    placeholder={
-                                        <div className="h-64 flex flex-col items-center justify-center bg-black/40 text-white/50 gap-2 border border-white/10 rounded-xl">
-                                            <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-                                            <span className="text-xs tracking-wider uppercase">Loading Tweet...</span>
-                                        </div>
-                                    }
-                                />
+                                <blockquote className="twitter-tweet" data-theme="dark" data-align="center">
+                                    <a href={`https://twitter.com/i/status/${post.tweetId}`}>Loading Tweet...</a>
+                                </blockquote>
                             </div>
                         </div>
                     )}
