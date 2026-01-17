@@ -40,13 +40,15 @@ export default function Home() {
             <main className="flex-1 w-full max-w-md mx-auto">
                 <PullToRefresh onRefresh={handleRefresh}>
                     {/* Hero Banner */}
-                    <div className="w-full mb-0.5 pointer-events-none"> {/* Disable pointer events on banner to prevent accidental drags/clicks if mostly visual */}
+                    {/* Hero Banner - HIDDEN
+                    <div className="w-full mb-0.5 pointer-events-none">
                         <img
                             src="/banner.jpg"
                             alt="Petty Mayonnaise"
                             className="w-full h-auto object-cover"
                         />
                     </div>
+                    */}
 
                     {/* Grid Content */}
                     <div className="w-full">
