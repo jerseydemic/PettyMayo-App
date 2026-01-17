@@ -204,15 +204,7 @@ export default function Article() {
                         {post.title}
                     </h1>
 
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-yellow-500 p-[2px]">
-                            <img src="/icon.png" className="w-full h-full rounded-full border-2 border-black object-cover" />
-                        </div>
-                        <div>
-                            <p className="font-bold text-sm">Petty Mayo</p>
-                            <p className="text-white/50 text-xs">Just now • 5 min read</p>
-                        </div>
-                    </div>
+
 
                     {/* Share Options Row */}
                     <ShareOptions title={post.title} url={window.location.href} />
