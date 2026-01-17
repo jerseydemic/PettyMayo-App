@@ -21,7 +21,7 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const analytics = getAnalytics(app);
 
-import { enableIndexedDbPersistence } from 'firebase/firestore';
+// import { enableIndexedDbPersistence } from 'firebase/firestore';
 
 // enableIndexedDbPersistence(db).catch((err) => {
 //     if (err.code == 'failed-precondition') {
