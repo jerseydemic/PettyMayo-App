@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Share, Instagram } from 'lucide-react';
+import { ArrowLeft, Instagram } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Browser } from '@capacitor/browser';
 import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';

@@ -45,55 +45,48 @@ export default function ShareOptions({ title, url }: ShareOptionsProps) {
     };
 
     return (
-        <div className="w-full py-6 my-6 border-y border-white/5">
-            <div className="grid grid-cols-4 gap-4">
+        <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[320px] h-16 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 flex items-center justify-evenly px-2 shadow-2xl animate-in slide-in-from-bottom-20 duration-500">
 
-                {/* X (Twitter) */}
-                <button
-                    onClick={handleShareX}
-                    className="aspect-square rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 flex flex-col items-center justify-center gap-2 group transition-all active:scale-95"
-                >
-                    {/* Visual adjustment: Scale down X logo slightly to match stroke weight of other icons */}
-                    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-white group-hover:scale-110 transition-transform" aria-hidden="true">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-                    </svg>
-                    <span className="text-[10px] font-medium text-white/40 group-hover:text-white/70">Post</span>
-                </button>
+            {/* X (Twitter) */}
+            <button
+                onClick={handleShareX}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all active:scale-90"
+            >
+                <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-current" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+            </button>
 
-                {/* SMS */}
-                <button
-                    onClick={handleShareSMS}
-                    className="aspect-square rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 flex flex-col items-center justify-center gap-2 group transition-all active:scale-95"
-                >
-                    <MessageCircle size={20} className="text-white group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-medium text-white/40 group-hover:text-white/70">Text</span>
-                </button>
+            <div className="w-px h-6 bg-white/5" />
 
-                {/* Copy */}
-                <button
-                    onClick={handleCopyLink}
-                    className="aspect-square rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 flex flex-col items-center justify-center gap-2 group transition-all active:scale-95"
-                >
-                    {copied ? (
-                        <Check size={20} className="text-green-400" />
-                    ) : (
-                        <Link size={20} className="text-white group-hover:scale-110 transition-transform" />
-                    )}
-                    <span className={`text-[10px] font-medium transition-colors ${copied ? 'text-green-400' : 'text-white/40 group-hover:text-white/70'}`}>
-                        {copied ? 'Copied' : 'Copy'}
-                    </span>
-                </button>
+            {/* SMS */}
+            <button
+                onClick={handleShareSMS}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all active:scale-90"
+            >
+                <MessageCircle size={20} />
+            </button>
 
-                {/* System Share */}
-                <button
-                    onClick={handleSystemShare}
-                    className="aspect-square rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 flex flex-col items-center justify-center gap-2 group transition-all active:scale-95"
-                >
-                    <Share2 size={20} className="text-white group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-medium text-white/40 group-hover:text-white/70">Share</span>
-                </button>
+            <div className="w-px h-6 bg-white/5" />
 
-            </div>
+            {/* Copy */}
+            <button
+                onClick={handleCopyLink}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all active:scale-90"
+            >
+                {copied ? <Check size={20} className="text-green-400" /> : <Link size={20} />}
+            </button>
+
+            <div className="w-px h-6 bg-white/5" />
+
+            {/* System Share */}
+            <button
+                onClick={handleSystemShare}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all active:scale-90"
+            >
+                <Share2 size={20} />
+            </button>
+
         </div>
     );
 }
