@@ -6,6 +6,7 @@ import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admo
 import { Capacitor } from '@capacitor/core';
 import { STATIC_POSTS, type Post } from '../data/posts';
 import ShareOptions from '../components/ShareOptions';
+import Footer from '../components/Footer';
 
 export default function Article() {
     const { state } = useLocation();
@@ -232,8 +233,10 @@ export default function Article() {
                     {/* Article Content with Middle Ad Logic */}
                     {renderContent()}
 
-                    <div className="mt-12 py-8 border-t border-white/10 text-center">
-                        <p className="text-xs text-white/30 uppercase tracking-[0.2em]">Real Petty Mayo • 2024</p>
+                    {renderContent()}
+
+                    <div className="mt-4">
+                        <Footer />
                     </div>
 
 
