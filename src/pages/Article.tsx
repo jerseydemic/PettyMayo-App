@@ -1,18 +1,19 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Share, Instagram } from 'lucide-react';
-import { Share as CapacitorShare } from '@capacitor/share';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Browser } from '@capacitor/browser';
 import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 import { Capacitor } from '@capacitor/core';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { STATIC_POSTS, type Post } from '../data/posts';
+import ShareDrawer from '../components/ShareDrawer';
 
 export default function Article() {
     const { state } = useLocation();
     const navigate = useNavigate();
     const { id, slug } = useParams();
     const [post, setPost] = useState<Post | null>(null);
+    const [showShareDrawer, setShowShareDrawer] = useState(false);
 
     // Dynamic Settings State
     const [settings, setSettings] = useState({
@@ -183,37 +184,16 @@ export default function Article() {
                         <Instagram size={20} />
                     </button>
                     <button
-                        onClick={async () => {
-                            try {
-                                const shareData = {
-                                    title: post.title,
-                                    text: `Check out this tea! ☕️ ${post.title}`,
-                                    url: window.location.href,
-                                    dialogTitle: 'Share with friends',
-                                };
-
-                                const canShare = await CapacitorShare.canShare();
-                                if (canShare.value) {
-                                    await CapacitorShare.share(shareData);
-                                } else {
-                                    // Web Fallback
-                                    await navigator.clipboard.writeText(window.location.href);
-                                    alert("Link copied to clipboard! 📋");
-                                }
-                            } catch (error) {
-                                console.error('Share failed:', error);
-                                // Fallback for errors (like user cancelling) or unsupported environments
-                                await navigator.clipboard.writeText(window.location.href);
-                                alert("Link copied to clipboard! 📋");
-                            }
-                        }}
+                        onClick={() => setShowShareDrawer(true)}
                         className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
                         <Share size={20} />
                     </button>
                 </div>
             </div>
 
+            {/* ... rest of the component ... */}
             <article className="flex-1 max-w-md mx-auto w-full pb-32">
+                {/* ... existing article content ... */}
                 {/* Image */}
                 <div className="w-full aspect-video bg-gray-900 relative overflow-hidden group">
                     <img
@@ -268,6 +248,15 @@ export default function Article() {
 
                 </div>
             </article>
+
+            {/* Share Drawer */}
+            <ShareDrawer
+                isOpen={showShareDrawer}
+                onClose={() => setShowShareDrawer(false)}
+                title={post.title}
+                url={window.location.href}
+                thumbnail={post.thumbnail}
+            />
         </div>
     );
 }
