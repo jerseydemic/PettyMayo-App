@@ -95,6 +95,9 @@ export default function Create({ embedded, editingPost, onClearEdit }: CreatePro
 
 
     const handleSave = async () => {
+        if (!title) return;
+        setIsGenerating(true); // Re-use generating state for save loading
+
         const newPost: Post = {
             id: editingPost?.id || Date.now().toString(),
             thumbnail: image || '/placeholder.jpg',
@@ -108,7 +111,14 @@ export default function Create({ embedded, editingPost, onClearEdit }: CreatePro
         };
 
         try {
-            await setDoc(doc(db, "posts", newPost.id), newPost);
+            // timeout promise
+            const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("Database operation timed out")), 10000));
+
+            // Race Firestore against timeout
+            await Promise.race([
+                setDoc(doc(db, "posts", newPost.id), newPost),
+                timeout
+            ]);
 
             if (onClearEdit) {
                 onClearEdit();
@@ -116,9 +126,11 @@ export default function Create({ embedded, editingPost, onClearEdit }: CreatePro
             } else {
                 window.location.href = '/';
             }
-        } catch (e) {
+        } catch (e: any) {
             console.error("Error saving post: ", e);
-            alert("Failed to save. Check console.");
+            alert(`Failed to save: ${e.message || "Unknown error"}. Check console for details.`);
+        } finally {
+            setIsGenerating(false);
         }
     };
 
@@ -151,11 +163,11 @@ export default function Create({ embedded, editingPost, onClearEdit }: CreatePro
 
                     <button
                         onClick={handleSave}
-                        disabled={!title}
-                        className="bg-white text-black h-10 px-6 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-gray-200 disabled:opacity-50 transition-all flex items-center gap-2 shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)] active:scale-95"
+                        disabled={!title || isGenerating}
+                        className={`bg-white text-black h-10 px-6 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-gray-200 disabled:opacity-50 transition-all flex items-center gap-2 shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)] active:scale-95 ${isGenerating ? 'cursor-wait' : ''}`}
                     >
-                        <Check size={16} />
-                        Save Story
+                        {isGenerating ? <div className="w-3 h-3 border-2 border-black/30 border-t-black rounded-full animate-spin" /> : <Check size={16} />}
+                        {isGenerating ? 'Saving...' : 'Save Story'}
                     </button>
                 </div>
             )}
