@@ -45,7 +45,7 @@ export default function ShareOptions({ title, url }: ShareOptionsProps) {
     };
 
     return (
-        <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[320px] h-16 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 flex items-center justify-evenly px-2 shadow-2xl animate-in slide-in-from-bottom-20 duration-500">
+        <div className="fixed bottom-[calc(2.5rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[320px] h-16 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 flex items-center justify-evenly px-2 shadow-2xl animate-in slide-in-from-bottom-20 duration-500">
 
             {/* X (Twitter) */}
             <button

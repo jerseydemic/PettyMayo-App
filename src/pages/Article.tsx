@@ -9,6 +9,7 @@ import ShareOptions from '../components/ShareOptions';
 
 export default function Article() {
     const { state } = useLocation();
+    const { slug, id } = useParams();
     const navigate = useNavigate();
     const [post, setPost] = useState<Post | null>(null);
 
@@ -178,7 +179,7 @@ export default function Article() {
             )}
 
             {/* Liquid Glass Header (Absolute Overlay) */}
-            <div className="absolute top-0 w-full z-50 px-4 py-4 flex items-center justify-between pointer-events-none">
+            <div className="absolute top-0 w-full z-50 px-4 py-4 pt-[calc(1rem+env(safe-area-inset-top))] flex items-center justify-between pointer-events-none">
                 <button
                     onClick={() => navigate(-1)}
                     className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all pointer-events-auto border border-white/10"
@@ -215,8 +216,7 @@ export default function Article() {
 
 
 
-                    {/* Share Options Row */}
-                    <ShareOptions title={post.title} url={window.location.href} />
+
 
                     {/* Tweet Embed */}
                     {post.tweetId && (
@@ -239,6 +239,8 @@ export default function Article() {
 
                 </div>
             </article>
+            {/* Share Options (Fixed Overlay) */}
+            <ShareOptions title={post.title} url={window.location.href} />
         </div>
     );
 }

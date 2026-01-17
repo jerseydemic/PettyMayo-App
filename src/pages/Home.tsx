@@ -20,7 +20,7 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-black text-white relative flex flex-col">
             {/* Liquid Glass Header */}
-            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 flex justify-center items-center relative">
+            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 pt-[calc(1rem+env(safe-area-inset-top))] flex justify-center items-center relative">
                 <h1 className="text-xl font-bold tracking-tight uppercase text-white/90 drop-shadow-sm">Petty Mayo</h1>
             </header>
 
@@ -77,6 +77,9 @@ export default function Home() {
                     <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] font-medium pt-2 border-t border-white/5 w-full text-center">
                         Stay Petty 💅
                     </p>
+                    <Link to="/privacy" className="text-[10px] text-white/30 hover:text-white/50 transition-colors uppercase tracking-widest">
+                        Privacy Policy
+                    </Link>
                 </div>
                 <div className="h-safe-area-bottom" /> {/* Safety spacing for iPhone Home Bar */}
             </footer>
