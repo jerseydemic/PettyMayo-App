@@ -33,3 +33,4 @@ android/.idea/workspace.xml
 ios/App/App/public/
 ios/App/Podfile.lock
 ios/App/Pods/
+.env*.local
