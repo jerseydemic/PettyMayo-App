@@ -3,20 +3,31 @@ import { Link } from 'react-router-dom';
 import { fetchPosts, type Post } from '../data/posts';
 import { Loader2 } from 'lucide-react';
 import Footer from '../components/Footer';
+import PullToRefresh from '../components/PullToRefresh';
 
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
 
+    const loadData = async () => {
+        const data = await fetchPosts();
+        setPosts(data);
+    };
+
     useEffect(() => {
-        const loadData = async () => {
+        const init = async () => {
             setLoading(true);
-            const data = await fetchPosts();
-            setPosts(data);
+            await loadData();
             setLoading(false);
         };
-        loadData();
+        init();
     }, []);
+
+    const handleRefresh = async () => {
+        // Add artificial delay for better UX (so user sees the spinner)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await loadData();
+    };
 
     return (
         <div className="min-h-screen bg-black text-white relative flex flex-col">
@@ -27,46 +38,46 @@ export default function Home() {
 
             {/* Content */}
             <main className="flex-1 w-full max-w-md mx-auto">
-                {/* Hero Banner */}
-                <div className="w-full mb-0.5">
-                    <img
-                        src="/banner.jpg"
-                        alt="Petty Mayonnaise"
-                        className="w-full h-auto object-cover"
-                    />
-                </div>
+                <PullToRefresh onRefresh={handleRefresh}>
+                    {/* Hero Banner */}
+                    <div className="w-full mb-0.5 pointer-events-none"> {/* Disable pointer events on banner to prevent accidental drags/clicks if mostly visual */}
+                        <img
+                            src="/banner.jpg"
+                            alt="Petty Mayonnaise"
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
 
-                {/* Grid Content */}
-                {/* Grid Content */}
-                <div className="w-full">
-                    {loading ? (
-                        <div className="flex h-[40vh] items-center justify-center">
-                            <Loader2 className="w-8 h-8 animate-spin text-white/50" />
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-3 gap-1">
-                            {posts.map((post) => (
-                                <Link
-                                    key={post.id}
-                                    to={`/${post.category || 'news'}/${post.slug || post.id}`} // Fallback for old/custom posts without slugs
-                                    className="group relative aspect-[4/5] overflow-hidden bg-gray-900 border border-white/10"
-                                >
-                                    <img
-                                        src={post.thumbnail}
-                                        alt={post.title}
-                                        className="h-full w-full object-contain"
-                                        loading="lazy"
-                                    />
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                    {/* Grid Content */}
+                    <div className="w-full">
+                        {loading ? (
+                            <div className="flex h-[40vh] items-center justify-center">
+                                <Loader2 className="w-8 h-8 animate-spin text-white/50" />
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-3 gap-1">
+                                {posts.map((post) => (
+                                    <Link
+                                        key={post.id}
+                                        to={`/${post.category || 'news'}/${post.slug || post.id}`} // Fallback for old/custom posts without slugs
+                                        className="group relative aspect-[4/5] overflow-hidden bg-gray-900 border border-white/10"
+                                    >
+                                        <img
+                                            src={post.thumbnail}
+                                            alt={post.title}
+                                            className="h-full w-full object-contain"
+                                            loading="lazy"
+                                        />
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Social Footer */}
+                    <Footer />
+                </PullToRefresh>
             </main>
-
-            {/* Social Footer */}
-            {/* Social Footer */}
-            <Footer />
         </div>
     );
 }

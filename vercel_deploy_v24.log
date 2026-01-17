@@ -1,0 +1,27 @@
+Vercel CLI 50.3.0
+Retrieving project…
+Deploying demics-projects-779dc7a0/pettymayo-app
+Uploading [--------------------] (0.0B/67.7MB)
+Uploading [=====---------------] (16.9MB/67.7MB)
+Uploading [==========----------] (33.9MB/67.7MB)
+Uploading [===============-----] (50.8MB/67.7MB)
+Uploading [====================] (67.7MB/67.7MB)
+Inspect: https://vercel.com/demics-projects-779dc7a0/pettymayo-app/FkxiqDQP8ZFGEuSrwhqJMfQ4u22p [1m]
+Production: https://pettymayo-6slh2rm0h-demics-projects-779dc7a0.vercel.app [1m]
+https://pettymayo-6slh2rm0h-demics-projects-779dc7a0.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 993 deployment files...
+Building: Restored build cache from previous deployment (EzdWBAa1FeW7iDy2huH9uV8dDo9f)
+Building: Running "vercel build"
+Building: Vercel CLI 50.4.4
+Building: Installing dependencies...
+Building: up to date in 1s
+Building: 63 packages are looking for funding
+Building: run `npm fund` for details
+Building: Running "npm run build"
+Building: > pettymayo@1.20.11 build
+Building: > tsc -b && vite build
+Error: Command "npm run build" exited with 2

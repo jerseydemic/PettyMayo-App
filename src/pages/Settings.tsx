@@ -58,7 +58,7 @@ export default function Settings({ embedded = false }: SettingsProps) {
         <div className={`min-h-full flex flex-col font-sans ${embedded ? 'min-h-0' : 'bg-[#121212] text-white'}`}>
             {!embedded && (
                 <div className="sticky top-0 z-20 bg-[#1e1e1e] shadow-md px-4 py-4 flex items-center border-b border-[#2c2c2c]">
-                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-gray-400 hover:text-white rounded-full">
+                    <button onClick={() => navigate(-1)} aria-label="Go back" className="p-2 -ml-2 text-gray-400 hover:text-white rounded-full">
                         <ArrowLeft size={24} />
                     </button>
                     <span className="ml-4 font-bold uppercase tracking-widest text-lg text-white">App Settings</span>
@@ -189,6 +189,7 @@ export default function Settings({ embedded = false }: SettingsProps) {
                                                 max="20"
                                                 value={settings.middleAdInterval}
                                                 onChange={(e) => handleChange('middleAdInterval', parseInt(e.target.value) || 1)}
+                                                aria-label="Ad injection interval"
                                                 className="w-12 bg-[#252525] text-white font-bold text-center p-1 rounded border border-[#444] focus:border-purple-500 outline-none"
                                             />
                                             <button

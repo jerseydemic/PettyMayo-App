@@ -11,13 +11,58 @@ export interface Post {
 }
 
 
-export const fetchPosts = async (): Promise<Post[]> => {
-    // 1. Get Custom Posts from LocalStorage
-    const saved = localStorage.getItem('local_posts'); // Fixed key to match other files
-    const customPosts: Post[] = saved ? JSON.parse(saved) : [];
+import { db } from '../lib/firebase';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 
-    // 2. Return merged list (Custom first)
-    return [...customPosts, ...STATIC_POSTS];
+export const fetchPosts = async (): Promise<Post[]> => {
+    // 0. Check Persistent Cache (TTL: 1 Hour) - COST SAVING
+    const CACHE_KEY = 'cached_posts_v2';
+    const CACHE_TTL = 60 * 60 * 1000; // 1 Hour
+
+    try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            const { data, timestamp } = JSON.parse(cached);
+            if (Date.now() - timestamp < CACHE_TTL) {
+                console.log("Serving posts from cache");
+                return data;
+            }
+        }
+    } catch (e) {
+        console.warn("Cache read failed", e);
+    }
+
+    let firestorePosts: Post[] = [];
+
+    try {
+        const q = query(collection(db, 'posts'), orderBy('timestamp', 'desc'), limit(50));
+        const querySnapshot = await getDocs(q);
+        firestorePosts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Post));
+    } catch (error) {
+        console.error("Error fetching Firestore posts:", error);
+    }
+
+    // 1. Get Custom Posts from LocalStorage (Fallback/Legacy)
+    const saved = localStorage.getItem('local_posts');
+    const localPosts: Post[] = saved ? JSON.parse(saved) : [];
+
+    // Filter out local posts that exist in Firestore to avoid duplicates
+    const uniqueLocalPosts = localPosts.filter(lp => !firestorePosts.some(fp => fp.id === lp.id));
+
+    // 2. Return merged list (Firestore -> Local -> Static)
+    const allPosts = [...firestorePosts, ...uniqueLocalPosts, ...STATIC_POSTS];
+
+    // 3. Save to Persistent Cache
+    try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+            data: allPosts,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.warn("Cache write failed", e);
+    }
+
+    return allPosts;
 };
 
 export const STATIC_POSTS: Post[] = [

@@ -86,6 +86,7 @@ export default function ShareDrawer({ isOpen, onClose, title, url, thumbnail }: 
                     <h2 className="text-xl font-bold text-white tracking-wide">Share Story</h2>
                     <button
                         onClick={onClose}
+                        aria-label="Close share drawer"
                         className="p-1 text-gray-400 hover:text-white bg-white/5 rounded-full transition-colors"
                     >
                         <X size={20} />

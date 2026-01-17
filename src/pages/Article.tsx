@@ -183,6 +183,7 @@ export default function Article() {
             <div className="absolute top-0 w-full z-50 px-4 py-4 pt-[calc(1rem+env(safe-area-inset-top))] flex items-center justify-between pointer-events-none">
                 <button
                     onClick={() => navigate(-1)}
+                    aria-label="Go back"
                     className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all pointer-events-auto border border-white/10"
                 >
                     <ArrowLeft size={20} />
@@ -190,7 +191,9 @@ export default function Article() {
                 <div className="flex gap-3 pointer-events-auto">
                     <button onClick={() => {
                         Browser.open({ url: 'https://instagram.com/realpettymay0' });
-                    }} className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
+                    }}
+                        aria-label="Visit Instagram"
+                        className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
                         <Instagram size={20} />
                     </button>
                 </div>
@@ -231,8 +234,6 @@ export default function Article() {
                     )}
 
                     {/* Article Content with Middle Ad Logic */}
-                    {renderContent()}
-
                     {renderContent()}
 
                     <div className="mt-4">

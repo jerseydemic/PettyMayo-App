@@ -11,6 +11,7 @@ export default function Privacy() {
             <div className="sticky top-0 z-50 w-full px-4 py-4 pt-[calc(1rem+env(safe-area-inset-top))] flex items-center justify-between bg-black/60 backdrop-blur-xl border-b border-white/10">
                 <button
                     onClick={() => navigate(-1)}
+                    aria-label="Go back"
                     className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10"
                 >
                     <ArrowLeft size={20} />

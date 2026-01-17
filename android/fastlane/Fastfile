@@ -4,7 +4,7 @@ platform :android do
   desc "Deploy to Internal Testing"
   lane :deploy do
     gradle(
-      task: "bundleRelease",
+      task: "clean bundleRelease",
       properties: {
         "android.injected.signing.store.file" => File.expand_path("../app/release.keystore"),
         "android.injected.signing.store.password" => "TrainerApp123!",
@@ -18,9 +18,9 @@ platform :android do
         json_key: "fastlane/api-key.json",
         package_name: "com.kingdemic.pettymayo",
         release_status: "draft",
-        skip_upload_metadata: true,
-        skip_upload_images: true,
-        skip_upload_screenshots: true,
+        skip_upload_metadata: false,
+        skip_upload_images: false,
+        skip_upload_screenshots: false,
         validate_only: false
     )
   end
