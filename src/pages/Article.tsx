@@ -182,11 +182,6 @@ export default function Article() {
                     }} className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
                         <Instagram size={20} />
                     </button>
-                    <button
-                        onClick={() => setShowShareDrawer(true)}
-                        className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-all border border-white/10">
-                        <Share size={20} />
-                    </button>
                 </div>
             </div>
 
