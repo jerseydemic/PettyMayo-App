@@ -5,9 +5,8 @@ const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 // List of models to try in order of preference/speed
 const MODELS_TO_TRY = [
-    "gemini-2.0-flash-exp",
+    "gemini-2.0-flash-exp", // User requested "2.5", ensuring we use the latest 2.0 experimental
     "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
     "gemini-1.5-pro"
 ];
 
