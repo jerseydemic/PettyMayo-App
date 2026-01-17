@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Lock, LogIn, LayoutDashboard, Library, LogOut, Globe } from 'lucide-react';
 import Create from './Create';
 import ManageContent from './admin/ManageContent';
@@ -9,7 +10,12 @@ import { type Post } from '../data/posts';
 export default function Admin() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
-    const [activeTab, setActiveTab] = useState<'create' | 'manage'>('manage');
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Derive active tab from URL, default to 'manage'
+    const activeTab = location.pathname.includes('/create') ? 'create' : 'manage';
+
     const [error, setError] = useState(false);
     const [editingPost, setEditingPost] = useState<Post | null>(null);
 
@@ -50,7 +56,7 @@ export default function Admin() {
 
     const handleEditPost = (post: Post) => {
         setEditingPost(post);
-        setActiveTab('create');
+        navigate('/admin/create');
     };
 
 
@@ -115,7 +121,7 @@ export default function Admin() {
 
     const NavButton = ({ tab, icon: Icon, label }: { tab: typeof activeTab, icon: any, label: string }) => (
         <button
-            onClick={() => setActiveTab(tab)}
+            onClick={() => navigate(tab === 'manage' ? '/admin' : `/admin/${tab}`)}
             className={`w-full h-12 px-4 rounded-xl flex items-center gap-3 transition-all text-left border ${activeTab === tab
                 ? 'bg-blue-600/10 border-blue-500/50 shadow-[0_0_20px_-5px_rgba(37,99,235,0.3)]'
                 : 'bg-transparent border-transparent hover:bg-white/5'
@@ -189,14 +195,14 @@ export default function Admin() {
             {/* Bottom Nav - Mobile Only (Floating Glass) */}
             <nav className="md:hidden fixed bottom-6 left-6 right-6 h-16 bg-[#111]/80 backdrop-blur-2xl border border-white/10 rounded-2xl z-50 flex items-center justify-around shadow-2xl shadow-black/80 ring-1 ring-white/5">
                 <button
-                    onClick={() => setActiveTab('manage')}
+                    onClick={() => navigate('/admin')}
                     className={`flex flex-col items-center justify-center w-12 h-12 rounded-xl transition-all ${activeTab === 'manage' ? 'bg-blue-500/20 text-blue-400' : 'text-gray-500'}`}
                 >
                     <Library size={20} />
                 </button>
                 <div className="w-px h-6 bg-white/10" />
                 <button
-                    onClick={() => setActiveTab('create')}
+                    onClick={() => navigate('/admin/create')}
                     className={`flex flex-col items-center justify-center w-12 h-12 rounded-xl transition-all ${activeTab === 'create' ? 'bg-blue-500/20 text-blue-400' : 'text-gray-500'}`}
                 >
                     <LayoutDashboard size={20} />
