@@ -6,7 +6,7 @@ export interface Post {
     thumbnail: string;
     articleUrl: string; // Keep for fallback or external sharing
     content?: string;   // Internal article content
-    tweetId?: string;   // Optional Tweet Embed ID
+    tweetId?: string | null;   // Optional Tweet Embed ID
     timestamp?: number; // Creation/Update timestamp
 }
 
