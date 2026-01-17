@@ -12,9 +12,9 @@ export default function AdMobController() {
             if (!Capacitor.isNativePlatform()) return;
 
             try {
+                await AdMob.requestTrackingAuthorization();
                 await AdMob.initialize({
-                    requestTrackingAuthorization: true,
-                    initializeForTagForChildDirectedTreatment: false,
+                    tagForChildDirectedTreatment: false,
                 });
 
                 // Use Test ID for Dev, Real ID for Prod

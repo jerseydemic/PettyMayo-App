@@ -7,14 +7,16 @@ import AdMobController from './components/AdMobController';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/article/:id" element={<Article />} />
-      <Route path="/:category/:slug" element={<Article />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/privacy" element={<Privacy />} />
-    </Routes>
-    <AdMobController />
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/article/:id" element={<Article />} />
+        <Route path="/:category/:slug" element={<Article />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/privacy" element={<Privacy />} />
+      </Routes>
+      <AdMobController />
+    </>
   );
 }
 
