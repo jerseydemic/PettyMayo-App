@@ -6,14 +6,13 @@ import { AdMob, BannerAdPosition, BannerAdSize } from '@capacitor-community/admo
 import { Capacitor } from '@capacitor/core';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { STATIC_POSTS, type Post } from '../data/posts';
-import ShareDrawer from '../components/ShareDrawer';
+import ShareOptions from '../components/ShareOptions';
 
 export default function Article() {
     const { state } = useLocation();
     const navigate = useNavigate();
     const { id, slug } = useParams();
     const [post, setPost] = useState<Post | null>(null);
-    const [showShareDrawer, setShowShareDrawer] = useState(false);
 
     // Dynamic Settings State
     const [settings, setSettings] = useState({
@@ -210,7 +209,7 @@ export default function Article() {
                         {post.title}
                     </h1>
 
-                    <div className="flex items-center gap-3 mb-8">
+                    <div className="flex items-center gap-3 mb-6">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-yellow-500 p-[2px]">
                             <img src="/icon.png" className="w-full h-full rounded-full border-2 border-black object-cover" />
                         </div>
@@ -219,6 +218,9 @@ export default function Article() {
                             <p className="text-white/50 text-xs">Just now • 5 min read</p>
                         </div>
                     </div>
+
+                    {/* Share Options Row */}
+                    <ShareOptions title={post.title} url={window.location.href} />
 
                     {/* Tweet Embed */}
                     {post.tweetId && (
@@ -248,15 +250,6 @@ export default function Article() {
 
                 </div>
             </article>
-
-            {/* Share Drawer */}
-            <ShareDrawer
-                isOpen={showShareDrawer}
-                onClose={() => setShowShareDrawer(false)}
-                title={post.title}
-                url={window.location.href}
-                thumbnail={post.thumbnail}
-            />
         </div>
     );
 }
