@@ -103,7 +103,7 @@ export default function Create({ embedded, editingPost, onClearEdit }: CreatePro
             category: category || 'news',
             articleUrl: '#',
             content: content,
-            tweetId: tweetId || undefined,
+            tweetId: tweetId || null, // Fix: Firestore rejects 'undefined', use 'null'
             timestamp: Date.now() // Always bump timestamp
         };
 
