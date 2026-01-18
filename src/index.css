@@ -1,77 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Critical: Force form elements to respect Tailwind color classes */
-input,
-select,
-textarea {
-  color: inherit !important;
-  background-color: transparent;
+@theme {
+    --font-sans: 'Inter', system-ui, sans-serif;
+
+    --animate-fade-in: fadeIn 0.5s ease-out;
+    --animate-slide-up: slideUp 0.5s ease-out;
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        0% {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 }
 
-/* Ensure proper autocomplete styling for dark backgrounds */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-text-fill-color: #fff !important;
-  -webkit-box-shadow: 0 0 0 1000px #222 inset !important;
-  caret-color: white !important;
-  transition: background-color 5000s ease-in-out 0s;
+@layer base {
+    body {
+        @apply bg-black text-white antialiased selection:bg-pink-500 selection:text-white;
+    }
 }
 
-/* Prevent text input color override on iOS */
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="search"],
-input[type="url"],
-textarea {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* Fix select dropdown on dark backgrounds */
-select {
-  -webkit-appearance: none;
-  appearance: none;
-  color: inherit !important;
-}
-
-html {
-  height: 100%;
-}
-
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #111;
-  /* Dark background for the "outside" area */
-  color: #fff;
-}
-
-body {
-  margin: 0 auto;
-  min-height: 100vh;
-  background-color: #000;
-  position: relative;
-  overflow-x: hidden;
-  overscroll-behavior-y: none;
-  /* Critical: Disables native Chrome/Webview pull-to-refresh so our custom one works */
-}
-
-/* Default mobile app container behavior */
-body {
-  width: 100%;
-  max-width: 480px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Hide scrollbar for clean look */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }

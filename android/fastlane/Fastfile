@@ -23,5 +23,30 @@ platform :android do
         skip_upload_screenshots: false,
         validate_only: false
     )
+    )
+  end
+
+  desc "Deploy to Production"
+  lane :deploy_prod do
+    gradle(
+      task: "clean bundleRelease",
+      properties: {
+        "android.injected.signing.store.file" => File.expand_path("../app/release.keystore"),
+        "android.injected.signing.store.password" => "TrainerApp123!",
+        "android.injected.signing.key.alias" => "strategy-trainer",
+        "android.injected.signing.key.password" => "TrainerApp123!"
+      }
+    )
+    
+    upload_to_play_store(
+        track: "production",
+        json_key: "fastlane/api-key.json",
+        package_name: "com.kingdemic.pettymayo",
+        release_status: "draft", # Safety first: upload as draft, then release in console
+        skip_upload_metadata: false,
+        skip_upload_images: false,
+        skip_upload_screenshots: false,
+        validate_only: false
+    )
   end
 end

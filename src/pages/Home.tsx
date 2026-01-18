@@ -1,85 +1,38 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchPosts, type Post } from '../data/posts';
-import { Loader2 } from 'lucide-react';
-import Footer from '../components/Footer';
-import PullToRefresh from '../components/PullToRefresh';
+import { motion } from 'framer-motion';
+import { useContent } from '../context/ContentContext';
 
 export default function Home() {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    const loadData = async () => {
-        const data = await fetchPosts();
-        setPosts(data);
-    };
-
-    useEffect(() => {
-        const init = async () => {
-            setLoading(true);
-            await loadData();
-            setLoading(false);
-        };
-        init();
-    }, []);
-
-    const handleRefresh = async () => {
-        // Add artificial delay for better UX (so user sees the spinner)
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await loadData();
-    };
+    const { articles } = useContent();
 
     return (
-        <div className="min-h-screen bg-black text-white relative flex flex-col">
-            {/* Liquid Glass Header */}
-            <header className="sticky top-0 z-10 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-4 pt-[calc(1rem+env(safe-area-inset-top))] flex justify-center items-center relative">
-                <h1 className="text-xl font-bold tracking-tight uppercase text-white/90 drop-shadow-sm">Petty Mayo</h1>
-            </header>
-
-            {/* Content */}
-            <main className="flex-1 w-full max-w-md mx-auto">
-                <PullToRefresh onRefresh={handleRefresh}>
-                    {/* Hero Banner */}
-                    {/* Hero Banner - HIDDEN
-                    <div className="w-full mb-0.5 pointer-events-none">
-                        <img
-                            src="/banner.jpg"
-                            alt="Petty Mayonnaise"
-                            className="w-full h-auto object-cover"
-                        />
-                    </div>
-                    */}
-
-                    {/* Grid Content */}
-                    <div className="w-full">
-                        {loading ? (
-                            <div className="flex h-[40vh] items-center justify-center">
-                                <Loader2 className="w-8 h-8 animate-spin text-white/50" />
+        <div className="p-1">
+            <div className="grid grid-cols-3 gap-1">
+                {articles.map((article, index) => (
+                    <motion.div
+                        key={article.id}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                    >
+                        {/* Link Structure: /Category/Slug */}
+                        <Link
+                            to={`/${article.category.toLowerCase()}/${article.slug}`}
+                            className="block relative aspect-square group overflow-hidden bg-zinc-900"
+                        >
+                            <img
+                                src={article.image}
+                                alt={article.title}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-pink-400 mb-1">{article.category}</span>
+                                <h3 className="text-xs font-bold text-white line-clamp-2 leading-tight">{article.title}</h3>
                             </div>
-                        ) : (
-                            <div className="grid grid-cols-3 gap-1">
-                                {posts.map((post) => (
-                                    <Link
-                                        key={post.id}
-                                        to={`/${post.category || 'news'}/${post.slug || post.id}`} // Fallback for old/custom posts without slugs
-                                        className="group relative aspect-[4/5] overflow-hidden bg-gray-900 border border-white/10"
-                                    >
-                                        <img
-                                            src={post.thumbnail}
-                                            alt={post.title}
-                                            className="h-full w-full object-contain"
-                                            loading="lazy"
-                                        />
-                                    </Link>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Social Footer */}
-                    <Footer />
-                </PullToRefresh>
-            </main>
+                        </Link>
+                    </motion.div>
+                ))}
+            </div>
         </div>
     );
 }
