@@ -7,6 +7,10 @@ import Article from './pages/Article';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import NotFound from './pages/NotFound';
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminEditor from './pages/admin/AdminEditor';
+import AdminSettings from './pages/admin/AdminSettings';
 import AdSenseInjector from './components/AdSenseInjector';
 import AnalyticsInjector from './components/AnalyticsInjector';
 import InstallPrompt from './components/InstallPrompt';
@@ -23,6 +27,14 @@ function AnimatedRoutes() {
 
                 {/* SEO Friendly URL: /category/slug-title */}
                 <Route path="/:category/:slug" element={<Article />} />
+
+                {/* Admin Routes */}
+                <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="new" element={<AdminEditor />} />
+                    <Route path="edit/:id" element={<AdminEditor />} />
+                    <Route path="settings" element={<AdminSettings />} />
+                </Route>
 
 
 
